@@ -43,7 +43,7 @@ export default function AuthPages({ type }) {
       <Toaster position="top-center" toastOptions={{ style: { background: '#1a1a1a', color: '#fff' } }} />
 
       {/* Header */}
-      <header className="sticky top-0 z-10 bg-[#0d0d0d] px-5 py-3 flex items-center justify-between shadow-md">
+      <header className="sticky top-0 z-10 bg-[#0d0d0d] px-5 py-3 flex  justify-between shadow-md">
         <button
           onClick={() => navigate("/")}
           className="text-gray-400 hover:text-gray-200 transition active:scale-95"
