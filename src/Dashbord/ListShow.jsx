@@ -19,6 +19,9 @@ export default function ListShow() {
         { id: 1, title: "January Fund 2025", entries: 12, date: "01 Jan 2025" },
         { id: 2, title: "February Fund 2025", entries: 8, date: "01 Feb 2025" },
         { id: 3, title: "March Fund 2025", entries: 15, date: "01 Mar 2025" },
+        { id: 3, title: "March Fund 2025", entries: 15, date: "01 Mar 2025" },
+        { id: 3, title: "March Fund 2025", entries: 15, date: "01 Mar 2025" },
+        { id: 3, title: "March Fund 2025", entries: 15, date: "01 Mar 2025" }
         // ... more data
       ];
       setFunds(apiData);
