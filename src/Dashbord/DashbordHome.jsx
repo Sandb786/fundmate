@@ -27,7 +27,7 @@ export default function DashboardLanding() {
         <h2 className="text-2xl font-bold  text-white">Funds List</h2>
       </div>
 
-    <div className='bg-gray-950 rounded-t-4xl overflow-y-auto'>
+    <div className='bg-gray-900 rounded-t-4xl overflow-y-auto'>
 
        {/* Search + Filter */}
       <div className="flex items-center gap-10 px-10 py-5 ">
