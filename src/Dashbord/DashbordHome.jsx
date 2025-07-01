@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { ChartSpline, User, Layers3 } from 'lucide-react';
+import { ChartSpline, User, Layers3,Search, ListFilter, } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Toaster } from 'react-hot-toast';
 
@@ -13,17 +13,34 @@ export default function DashboardLanding() {
   return (
     <div className="min-h-screen bg-black text-gray-100 flex flex-col">
          <Toaster position="top-center" toastOptions={{ style: { background: '#1a1a1a', color: '#fff' } }} />
-      {/* Header */}
-      <header className="flex justify-between items-center px-5 py-4 border-b border-gray-800">
-        <div className="flex items-center gap-2" onClick={() => navigate('/')}>
+      {/* Fixed Header */}
+      <header className="flex justify-between items-center px-5 py-4 sticky top-0 bg-black z-20">
+        <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/')}>
           <ChartSpline className="text-blue-400 w-7 h-7" />
           <h1 className="text-xl font-bold text-blue-400">FundMate</h1>
         </div>
         <User className="text-gray-400 w-6 h-6" />
       </header>
 
-      {/* Page Title */}
-      <h2 className="text-lg font-semibold px-5 py-3 text-white">Your Funds</h2>
+      {/* Fixed Page Title */}
+      <div className="sticky top-[60px] bg-black z-20 px-5 py-4 ">
+        <h2 className="text-2xl font-bold  text-white">Funds List</h2>
+      </div>
+
+    <div className='bg-gray-950 rounded-t-4xl overflow-y-auto'>
+
+       {/* Search + Filter */}
+      <div className="flex items-center gap-10 px-10 py-5 ">
+        <div className="flex items-center px-4 py-2 rounded-full flex-grow bg-black transition-colors">
+          <Search className="text-gray-400 w-5 h-4 mr-2"/>
+          <input
+            type="text"
+            placeholder="Search funds..."
+            className="bg-transparent text-sm text-gray-100 outline-none w-full"
+          />
+        </div>
+        <ListFilter className="text-gray-400 w-5 h-5 cursor-pointer" />
+      </div>
 
       {/* Grid of Fund Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 px-5 pb-24">
@@ -34,7 +51,7 @@ export default function DashboardLanding() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.05, duration: 0.4 }}
-            className="bg-[#0d0d0d] rounded-2xl p-5 shadow hover:shadow-lg cursor-pointer hover:scale-[1.02] active:scale-95 transition-all border border-gray-800"
+            className="bg-[#000000] rounded-2xl p-5 shadow hover:shadow-lg cursor-pointer hover:scale-[1.02] active:scale-95 transition-all border border-black"
           >
             {/* Icon and Title */}
             <div className="flex items-center gap-3 mb-3">
@@ -58,6 +75,10 @@ export default function DashboardLanding() {
       >
         +
       </button>
+
+      </div>
+
+
     </div>
   );
 }

@@ -6,6 +6,7 @@ import Index from './Website/Index';
 import AuthPages from './Website/AuthPages';
 import EmailVerification from './Website/EmailVerification';
 import DashboardHome from "./Dashbord/DashbordHome";
+import ListShow from "./Dashbord/ListShow";
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
 
 
           <Route path="/dashboard" element={<DashboardHome />} />
+          <Route path="/list" element={<ListShow />} />
+
         </Routes>
       </Router>
     </ThemeProvider>
