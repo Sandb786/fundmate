@@ -1,74 +1,124 @@
-import { ChartSpline, User, Search, Filter, List, Plus } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { ChartSpline, User, Layers3, Search, ListFilter, ClipboardPlus, } from 'lucide-react';
 import { motion } from 'framer-motion';
+import toast, { Toaster } from 'react-hot-toast';
+import { useState, useEffect } from 'react';
 
 export default function ListShow() {
   const navigate = useNavigate();
 
-  const handleAddClick = () => {
-    navigate('/add-expense');
+  // Inside your component:
+  const [funds, setFunds] = useState([]);
+
+  useEffect(() => {
+
+    // Dummy API simulation
+    const fetchFunds = async () => {
+      // Replace this with actual API call later (Axios, fetch, etc.)
+      const apiData = [
+        { id: 1, title: "January Fund 2025", entries: 12, date: "01 Jan 2025" },
+        { id: 2, title: "February Fund 2025", entries: 8, date: "01 Feb 2025" },
+        { id: 3, title: "March Fund 2025", entries: 15, date: "01 Mar 2025" },
+        // ... more data
+      ];
+      setFunds(apiData);
+    };
+
+    fetchFunds();
+
+  }, []);
+
+  const handleCardClick = (id) => {
+    //navigate(`/fund/${id}`);
+    toast.custom(<h1>💯💯Demo home</h1>, { style: { background: 'red' } });
   };
+
+
 
   return (
     <div className="min-h-screen bg-black text-gray-100 flex flex-col">
-      {/* Header */}
-      <header className="flex justify-between items-center px-5 py-4 bg-[#0d0d0d] border-b border-gray-800">
-        <div className="flex items-center gap-2">
-          <ChartSpline className="text-blue-400 w-7 h-7" />
+      <Toaster position="top-center" toastOptions={{ style: { background: '#1a1a1a', color: '#fff' } }} />
+      {/* Fixed Header */}
+      <header className="flex justify-between items-center px-5 py-4 sticky top-0 bg-black z-20">
+        <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/')}>
+          <ChartSpline className="text-blue-400 w-10 h-10" />
           <h1 className="text-xl font-bold text-blue-400">FundMate</h1>
         </div>
-        <User className="text-gray-400 w-6 h-6" />
+        <User className="text-gray-400 w-8 h-8" />
       </header>
 
-      {/* Tabs */}
-      <nav className="flex justify-center space-x-8 text-sm font-medium py-3 border-b border-gray-800">
-        <span className="text-white border-b-2 border-blue-400 pb-1 cursor-pointer">Lists</span>
-        <span className="text-gray-400 hover:text-white cursor-pointer">Demo</span>
-      </nav>
-
-      {/* Search + Filter */}
-      <div className="flex items-center gap-3 px-5 py-3">
-        <div className="flex items-center bg-gray-800 px-3 py-2 rounded-full flex-grow">
-          <Search className="text-gray-400 w-4 h-4 mr-2" />
-          <input
-            type="text"
-            placeholder="Search funds..."
-            className="bg-transparent text-sm text-gray-100 outline-none w-full"
-          />
-        </div>
-        <Filter className="text-gray-400 w-5 h-5 cursor-pointer" />
+      {/* Fixed Page Title */}
+      <div className=" bg-black z-20 px-5 mb-4 mx-auto">
+        <h2 className="text-2xl font-bold  text-white">Funds List</h2>
       </div>
 
-      {/* List Items */}
-      <div className="flex-1 overflow-y-auto px-5 space-y-4 pb-20">
-        {Array.from({ length: 6 }).map((_, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.05, duration: 0.4 }}
-            className="bg-[#1a1a1a] rounded-2xl p-4 shadow hover:bg-gray-800 cursor-pointer transition-all"
+      <div className='bg-gray-900 rounded-t-3xl'>
+
+        {/* Search + Add Fund Button */}
+        <div className="flex items-center gap-10 px-10 py-5">
+          <div className="flex items-center px-4 py-2 rounded-full flex-grow bg-black transition-colors">
+            <Search className="text-gray-400 w-5 h-4 mr-2" />
+            <input
+              type="text"
+              placeholder="Search funds..."
+              className="bg-transparent text-sm text-gray-100 outline-none w-full"
+            />
+          </div>
+
+          {/* <button
+            onClick={() => navigate('/add-fund')}
+            className="border-3 border-cyan-700 text-white text-sm  font-semibold px-2 py-2 rounded-2xl transition-all"
           >
-            <div className="flex items-center gap-3">
-              <List className="text-blue-400 w-6 h-6 flex-shrink-0" />
-              <div>
-                <p className="text-white font-medium text-base">Monthly Fund 2025</p>
-                <p className="text-xs text-gray-400 mt-1">
-                  10 Jan 2025 • Entries: 10
-                </p>
-              </div>
-            </div>
-          </motion.div>
-        ))}
+            + NEW
+          </button> */}
+          <button className='bg-cyan-700 p-1.5 rounded-md cursor-pointer shadow-lg active:scale-95 transition-all'>
+            <ClipboardPlus className="text-white w-6 h-6"
+            />
+          </button>
+        </div>
+
+
+        <div className='overflow-y-auto h-[calc(100vh-200px)] px-5'>
+
+          {/* Grid of Fund Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 px-5 pb-24 ">
+            {funds.map((fund, index) => (
+              <motion.div
+                key={fund.id}
+                onClick={() => handleCardClick(fund.id)}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05, duration: 0.4 }}
+                className="bg-[#000000] rounded-2xl p-5 shadow-lg cursor-pointer hover:scale-[1.02] active:scale-95 transition-all border border-black"
+              >
+                {/* Icon and Title */}
+                <div className="flex items-center gap-3 mb-3">
+                  <Layers3 className="text-blue-400 w-6 h-6" />
+                  <h3 className="text-lg font-semibold text-white">{fund.title}</h3>
+                </div>
+
+                {/* Stats */}
+                <div className="flex justify-between items-center text-sm text-gray-400">
+                  <p>Entries: <span className="font-medium text-gray-200">{fund.entries}</span></p>
+                  <p>{fund.date}</p>
+                </div>
+              </motion.div>
+            ))}
+
+          </div>
+        </div>
+
+        {/* Floating Add Button */}
+        <button
+          onClick={() => navigate('/add-fund')}
+          className="fixed bottom-5 right-5 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all"
+        >
+          +
+        </button>
+
       </div>
 
-      {/* Floating Add Button */}
-      <button
-        onClick={handleAddClick}
-        className="fixed bottom-5 right-5 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all"
-      >
-        <Plus className="w-6 h-6" />
-      </button>
+
     </div>
   );
 }

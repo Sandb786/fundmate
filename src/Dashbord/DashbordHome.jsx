@@ -6,9 +6,12 @@ import { Toaster } from 'react-hot-toast';
 export default function DashboardLanding() {
     const navigate = useNavigate();
 
-    const handleCardClick = (id) => {
+    const handleCardClick = (id) => 
+    {
         navigate(`/fund/${id}`);
     };
+
+    
 
     return (
         <div className="min-h-screen bg-black text-gray-100 flex flex-col">
@@ -45,7 +48,7 @@ export default function DashboardLanding() {
                 <div className='overflow-y-auto h-[calc(100vh-200px)] px-5'>
 
                     {/* Grid of Fund Cards */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 px-5 pb-24">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 px-5 pb-24">
                         {Array.from({ length: 10 }).map((_, index) => (
                             <motion.div
                                 key={index}
