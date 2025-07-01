@@ -16,14 +16,14 @@ export default function DashboardLanding() {
             {/* Fixed Header */}
             <header className="flex justify-between items-center px-5 py-4 sticky top-0 bg-black z-20">
                 <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/')}>
-                    <ChartSpline className="text-blue-400 w-7 h-7" />
+                    <ChartSpline className="text-blue-400 w-10 h-10" />
                     <h1 className="text-xl font-bold text-blue-400">FundMate</h1>
                 </div>
-                <User className="text-gray-400 w-6 h-6" />
+                <User className="text-gray-400 w-8 h-8" />
             </header>
 
             {/* Fixed Page Title */}
-            <div className="sticky top-[60px] bg-black z-20 px-5 py-4 ">
+            <div className=" bg-black z-20 px-5 mb-4 mx-auto">
                 <h2 className="text-2xl font-bold  text-white">Funds List</h2>
             </div>
 
