@@ -8,7 +8,7 @@ export default function DashboardLanding() {
 
     const handleCardClick = (id) => 
     {
-        navigate(`/fund/${id}`);
+        navigate(`/list`);
     };
 
     
