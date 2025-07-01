@@ -4,7 +4,9 @@ import { toast, Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { ChartSpline, ArrowLeft } from 'lucide-react';
 
-export default function AuthPages({ type }) {
+export default function AuthPages({ type }) 
+{
+
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(type);
 
@@ -14,7 +16,8 @@ export default function AuthPages({ type }) {
     password: '',
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e) => 
+  {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -31,9 +34,16 @@ export default function AuthPages({ type }) {
 
     console.log('Form Data:', submitData);
 
-    if (isLogin) {
+    if (isLogin) 
+    {
       toast.success('Login Successful');
-    } else {
+      navigate('/dashboard');
+
+      // Here you would typically handle login logic, e.g., API call
+      // For now, we'll just navigate to the dashboard
+    } 
+    else 
+    {
       navigate('/verify-email', { state: { email: submitData.email } });
     }
   };
@@ -150,6 +160,7 @@ export default function AuthPages({ type }) {
       <footer className="text-center text-xs text-gray-500 py-4 border-t border-gray-800 bg-[#0d0d0d]">
         © 2025 FundMate. All rights reserved.
       </footer>
+
     </div>
   );
 }
