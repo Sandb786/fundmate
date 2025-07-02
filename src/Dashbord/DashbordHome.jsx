@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { ChartSpline, User, Layers3, Search, ClipboardPlus, X, Save, ListPlus } from 'lucide-react';
+import { ChartSpline, User, Layers3, Search, ClipboardPlus, X, Save, ListPlus, List, ListCheck } from 'lucide-react';
 import { motion } from 'framer-motion';
 import toast, { Toaster } from 'react-hot-toast';
 import { useState, useEffect } from 'react';
@@ -125,11 +125,11 @@ export default function DashbordHome()
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
-              className="bg-gray-900 rounded-xl p-6 w-full max-w-sm text-center shadow-lg"
+              className="bg-gray-900 shadow-black rounded-xl p-6 w-full max-w-sm text-center shadow-lg"
             >
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-semibold text-white">Add New List</h3>
-                <X className="text-gray-400 w-5 h-5 cursor-pointer" onClick={() => setShowModal(false)} />
+                <h3 className="text-lg font-semibold text-white flex gap-2"><ListCheck/> Add New List</h3>
+                <X className="text-gray-400 w-5 h-5 cursor-pointer " onClick={() => setShowModal(false)} />
               </div>
 
               <input
@@ -137,13 +137,13 @@ export default function DashbordHome()
                 placeholder="Enter Fund Name"
                 value={newTitle}
                 onChange={(e) => setNewTitle(e.target.value)}
-                className="w-full px-4 py-2 mb-4 rounded bg-black text-gray-100 outline-none"
+                className="w-full px-4 py-2 mb-4 rounded bg-black  text-gray-100 outline-none"
               />
 
               <button
                 onClick={handleAddNewFund}
                 disabled={!newTitle.trim()}
-                className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition disabled:opacity-50"
+                className="w-full bg-blue-600 text-white py-2 active:scale-90 rounded-lg hover:bg-blue-700 transition disabled:opacity-50"
               >
                 <Save className="inline mr-2 w-4 h-4" />
                 Save Fund
