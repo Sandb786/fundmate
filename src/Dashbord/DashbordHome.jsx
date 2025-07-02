@@ -20,6 +20,8 @@ export default function DashboardHome() {
         <User className="text-gray-400 w-7 h-7" />
       </header>
 
+      <h2 className='font-semibold text-center text-2xl'>Dashbord</h2>
+
       {/* Welcome Message */}
       <section className="px-6 py-8">
         <h2 className="text-2xl font-bold mb-1 text-white">Welcome Back 👋</h2>
@@ -37,7 +39,7 @@ export default function DashboardHome() {
         {/* Quick Add Fund */}
         <button
           onClick={() => navigate('#')}
-          className="flex items-center gap-4 bg-gray-950 p-4 rounded-2xl shadow-lg shadow-black hover:shadow-lg transition-all active:scale-95"
+          className="flex items-center gap-4 bg-gray-950 p-4 rounded-2xl  hover:shadow-lg transition-all active:scale-95"
         >
           <PlusCircle className="text-blue-400 w-10 h-10" />
           <div className="text-left">
@@ -49,7 +51,7 @@ export default function DashboardHome() {
         {/* Show Fund List */}
         <button
           onClick={() => navigate('/list')}
-          className="flex items-center gap-4 bg-gray-950 p-4 rounded-2xl shadow-lg shadow-black hover:shadow-lg transition-all active:scale-95"
+          className="flex items-center gap-4 bg-gray-950 p-4 rounded-2xl  hover:shadow-lg transition-all active:scale-95"
         >
           <Layers3 className="text-cyan-400 w-9 h-9" />
           <div className="text-left">
@@ -61,7 +63,7 @@ export default function DashboardHome() {
         {/* Profile */}
         <button
           onClick={() => navigate('#')}
-          className="flex items-center gap-4 bg-gray-950 p-4 rounded-2xl shadow-lg shadow-black hover:shadow-lg transition-all active:scale-95"
+          className="flex items-center gap-4 bg-gray-950 p-4 rounded-2xl  hover:shadow-lg transition-all active:scale-95"
         >
           <User className="text-purple-400 w-10 h-10" />
           <div className="text-left">
@@ -73,7 +75,7 @@ export default function DashboardHome() {
         {/* Backup */}
         <button
           onClick={() => toast.error('Backup feature coming soon!')}
-          className="flex items-center gap-4 bg-gray-950 p-4 rounded-2xl shadow-lg shadow-black hover:shadow-lg transition-all active:scale-95"
+          className="flex items-center gap-4 bg-gray-950 p-4 rounded-2xl  hover:shadow-lg transition-all active:scale-95"
         >
           <DatabaseBackup className="text-gray-500 w-10 h-10" />
           <div className="text-left">
@@ -97,8 +99,7 @@ export default function DashboardHome() {
         </div>
       </div> */}
 
-      {/* Optional Mobile-Only Spacer */}
-      <div className="block sm:hidden py-10"></div>
+      
 
       {/* Footer */}
       <footer className="mt-auto px-6 py-6 text-center text-xs text-gray-500">
