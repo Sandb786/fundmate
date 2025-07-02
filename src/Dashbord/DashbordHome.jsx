@@ -1,67 +1,10 @@
-import { useNavigate } from 'react-router-dom';
-import { ChartSpline, User, Layers3, Search, ListPlus, ListCheck, Save, X } from 'lucide-react';
-import { motion } from 'framer-motion';
-import toast, { Toaster } from 'react-hot-toast';
-import { useState, useEffect } from 'react';
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import { ChartSpline, User } from 'lucide-react'
 
 export default function DashbordHome() {
-  const navigate = useNavigate();
-  const [funds, setFunds] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [showModal, setShowModal] = useState(false);
-  const [newTitle, setNewTitle] = useState('');
-
-  useEffect(() => {
-    const fetchFunds = async () => {
-      const apiData = [
-        { id: 1, title: "January Fund 2025", entries: 12, date: "01 Jan 2025" },
-        { id: 2, title: "February Fund 2025", entries: 8, date: "01 Feb 2025" },
-        { id: 3, title: "March Fund 2025", entries: 15, date: "01 Mar 2025" },
-        { id: 4, title: "April Fund 2025", entries: 10, date: "01 Apr 2025" },
-        { id: 5, title: "May Fund 2025", entries: 20, date: "01 May 2025" },
-        { id: 6, title: "June Fund 2025", entries: 18, date: "01 Jun 2025" },
-        { id: 7, title: "July Fund 2025", entries: 22, date: "01 Jul 2025" },
-        { id: 8, title: "August Fund 2025", entries: 14, date: "01 Aug 2025" },
-        { id: 9, title: "September Fund 2025", entries: 16, date: "01 Sep 2025" },
-        { id: 10, title: "October Fund 2025", entries: 19, date: "01 Oct 2025" },
-        { id: 11, title: "November Fund 2025", entries: 13, date: "01 Nov 2025" },
-        { id: 12, title: "December Fund 2025", entries: 17, date: "01 Dec 2025" }
-        
-      ];
-      setFunds(apiData);
-    };
-    fetchFunds();
-  }, [funds]);
-
-  const handleCardClick = (id) => {
-    toast.success(`Opening Fund ID: ${id}`);
-    // navigate(`/fund/${id}`);
-  };
-
-  const handleAddNewFund = () => 
-  {
-    const today = new Date();
-    const formattedDate = today.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
-
-    const newFund = {
-      id: funds.length + 1,
-      title: newTitle,
-      entries: 0,
-      date: formattedDate,
-    };
-
-    setFunds([newFund, ...funds]);
-    toast.success("New Fund Added!");
-    setShowModal(false);
-    setNewTitle('');
-  };
-
-  // Filtered List Based on Search Query
-  const filteredFunds = funds.filter( fund =>fund.title.toLowerCase().includes(searchQuery.toLowerCase()) );
-
   return (
     <div className="min-h-screen bg-black text-gray-100 flex flex-col relative">
-      <Toaster position="top-center" toastOptions={{ style: { background: '#1a1a1a', color: '#fff' } }} />
 
       {/* Header */}
       <header className="flex justify-between items-center px-5 py-4 sticky top-0 bg-black z-20">
@@ -72,105 +15,17 @@ export default function DashbordHome() {
         <User className="text-gray-400 w-8 h-8" />
       </header>
 
-      {/* Title */}
-      <div className="bg-black z-20 px-5 mb-4 mx-auto">
-        <h2 className="text-2xl font-bold text-white">Funds List</h2>
-      </div>
+      {/* Main Content */}
+      <main >
 
-      <div className='bg-gray-900 rounded-t-3xl'>
-
-        {/* Search + New Button */}
-        <div className="flex items-center gap-10 px-10 py-5">
-          <div className="flex items-center px-4 py-2 rounded-full flex-grow bg-black transition-colors">
-            <Search className="text-gray-400 w-5 h-4 mr-2" />
-            <input
-              type="text"
-              placeholder="Search funds..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="bg-transparent text-sm text-gray-100 outline-none w-full"
-            />
-          </div>
-
-          <button
-            onClick={() => setShowModal(true)}
-            className='bg-blue-600 p-1 rounded-md cursor-pointer shadow-lg active:scale-90 transition-all'
-          >
-            <ListPlus className="text-white w-6 h-6" />
-          </button>
+        <div className="flex-1 p-5 mx-auto max-w-4xl text-center">
+        <h2 className="text-2xl mb-4 font-thin">Welcome to FundMate Dashboard</h2>
+        <p className="text-gray-400">Manage your funds efficiently and effectively.</p>
         </div>
 
-        {/* Fund List */}
-        <div className='overflow-y-auto h-[calc(100vh-220px)] px-5'>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 px-5 pb-24">
-            {filteredFunds.length > 0 ? (
-              filteredFunds.map((fund, index) => (
-                <motion.div
-                  key={fund.id}
-                  onClick={() => handleCardClick(fund.id)}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.05, duration: 0.4 }}
-                  className="bg-[#000000] rounded-2xl p-5 shadow-lg cursor-pointer hover:scale-[1.02] active:scale-95 transition-all border border-black"
-                >
-                  <div className="flex items-center gap-3 mb-3">
-                    <Layers3 className="text-blue-400 w-6 h-6" />
-                    <h3 className="text-lg font-semibold text-white">{fund.title}</h3>
-                  </div>
-                  <div className="flex justify-between items-center text-sm text-gray-400">
-                    <p>Entries: <span className="font-medium text-gray-200">{fund.entries}</span></p>
-                    <p>{fund.date}</p>
-                  </div>
-                </motion.div>
-              ))
-            ) : (
-              <p className="text-center text-gray-500 py-10">No funds found.</p>
-            )}
-          </div>
-        </div>
 
-        {/* Floating Add Button */}
-        <button
-          onClick={() => setShowModal(true)}
-          className="fixed bottom-5 right-5 bg-blue-600 text-white p-4 rounded-2xl shadow-lg hover:scale-105 active:scale-95 transition-all"
-        >
-          +
-        </button>
 
-        {/* Modal */}
-        {showModal && (
-          <div className="fixed inset-0 backdrop-blur-sm bg-opacity-70 flex items-center justify-center z-30">
-            <motion.div
-              initial={{ opacity: 0, y: -30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-              className="bg-gray-900 shadow-black rounded-xl p-6 w-full max-w-sm text-center shadow-lg"
-            >
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-semibold text-white flex gap-2"><ListCheck /> Add New List</h3>
-                <X className="text-gray-400 w-5 h-5 cursor-pointer" onClick={() => setShowModal(false)} />
-              </div>
-
-              <input
-                type="text"
-                placeholder="Enter Fund Name"
-                value={newTitle}
-                onChange={(e) => setNewTitle(e.target.value)}
-                className="w-full px-4 py-2 mb-4 rounded bg-black text-gray-100 outline-none"
-              />
-
-              <button
-                onClick={handleAddNewFund}
-                disabled={!newTitle.trim()}
-                className="w-full bg-blue-600 text-white py-2 active:scale-90 rounded-lg hover:bg-blue-700 transition disabled:opacity-50"
-              >
-                <Save className="inline mr-2 w-4 h-4" />
-                Save Fund
-              </button>
-            </motion.div>
-          </div>
-        )}
-      </div>
+      </main>
     </div>
-  );
+  )
 }
