@@ -24,6 +24,11 @@ export default function DashbordHome() {
         </div>
 
 
+        <div>
+          <img src="https://via.placeholder.com/800x400" alt="Dashboard Illustration" className="mx-auto mt-10 rounded-lg shadow-lg" />
+          
+        </div>
+
 
       </main>
     </div>

@@ -64,7 +64,7 @@ export default function ListShow() {
 
       {/* Title */}
       <div className="bg-black z-20 px-5 mb-4 mx-auto">
-        <h2 className="text-2xl font-thine text-white">Funds List</h2>
+        <h2 className="text-2xl font-semibold text-white">Funds List</h2>
       </div>
 
       <div className='bg-gray-900 rounded-t-3xl'>
@@ -105,7 +105,7 @@ export default function ListShow() {
                 >
                   <div className="flex items-center gap-3 mb-3">
                     <Layers3 className="text-blue-400 w-6 h-6" />
-                    <h3 className="text-lg font-thine text-white">{fund.title}</h3>
+                    <h3 className="text-lg font-thin text-white">{fund.title}</h3>
                   </div>
                   <div className="flex justify-between items-center text-sm text-gray-400">
                     <p>Entries: <span className="font-medium text-gray-200">{fund.entries}</span></p>
@@ -137,7 +137,7 @@ export default function ListShow() {
               className="bg-gray-900 shadow-black rounded-xl p-6 w-full max-w-sm text-center shadow-lg"
             >
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-semibold text-white flex gap-2"><ListCheck /> Add New List</h3>
+                <h3 className="text-lg font-thin text-white flex gap-2"><ListCheck /> Add New List</h3>
                 <X className="text-gray-400 w-5 h-5 cursor-pointer" onClick={() => setShowModal(false)} />
               </div>
 
