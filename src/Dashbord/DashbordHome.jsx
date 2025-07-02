@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { ChartSpline, User, Layers3, Search, ClipboardPlus, X, Save } from 'lucide-react';
+import { ChartSpline, User, Layers3, Search, ClipboardPlus, X, Save, ListPlus } from 'lucide-react';
 import { motion } from 'framer-motion';
 import toast, { Toaster } from 'react-hot-toast';
 import { useState, useEffect } from 'react';
@@ -79,9 +79,9 @@ export default function DashbordHome()
           {/* New Fund Button */}
           <button
             onClick={() => setShowModal(true)}
-            className='bg-cyan-700 p-1.5 rounded-md cursor-pointer shadow-sm shadow-black active:scale-95 transition-all'
+            className='bg-blue-600 p-1 rounded-md cursor-pointer shadow-lg active:scale-90 transition-all'
           >
-            <ClipboardPlus className="text-white w-6 h-6" />
+            <ListPlus className="text-white w-6 h-6" />
           </button>
         </div>
 
@@ -125,7 +125,7 @@ export default function DashbordHome()
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
-              className="bg-gray-950 rounded-xl p-6 w-full max-w-sm text-center shadow-lg"
+              className="bg-gray-900 rounded-xl p-6 w-full max-w-sm text-center shadow-lg"
             >
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-lg font-semibold text-white">Add New List</h3>
@@ -137,7 +137,7 @@ export default function DashbordHome()
                 placeholder="Enter Fund Name"
                 value={newTitle}
                 onChange={(e) => setNewTitle(e.target.value)}
-                className="w-full px-4 py-2 mb-4 rounded bg-gray-900 text-gray-100 outline-none"
+                className="w-full px-4 py-2 mb-4 rounded bg-black text-gray-100 outline-none"
               />
 
               <button
