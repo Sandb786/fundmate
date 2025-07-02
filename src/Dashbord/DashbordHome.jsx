@@ -12,7 +12,7 @@ export default function DashboardHome() {
       <Toaster position="top-center" toastOptions={{ style: { background: '#1a1a1a', color: '#fff' } }} />
 
       {/* Header */}
-      <header className="flex justify-between items-center px-5 py-4 sticky top-0 bg-black z-20 border-b border-gray-800">
+      <header className="flex justify-between items-center px-5 py-4 sticky top-0 bg-black z-20 border-b border-gray-950">
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/')}>
           <ChartSpline className="text-blue-400 w-8 h-8" />
           <h1 className="text-xl font-bold text-blue-400">FundMate</h1>
@@ -28,7 +28,7 @@ export default function DashboardHome() {
         <p className="text-gray-400 text-sm">Manage your funds quickly and efficiently.</p>
       </section>
 
-    <div className='p-3'>
+    <div className='p-4'>
       {/* Dashboard Buttons */}
       <section className="grid gap-6 grid-cols-1 sm:grid-cols-2 px-6  bg-gray-900 p-10 rounded-3xl">
 
@@ -89,7 +89,7 @@ export default function DashboardHome() {
       </div>
 
       {/* Mobile-Only Extra Section (To fill empty space on small screens) */}
-      <section className="block sm:hidden text-center mt-5 px-0">
+      <section className="block sm:hidden text-center mt-5 px-5">
         <h2 className="text-lg text-gray-300 mb-2">More Features Coming Soon 🚀</h2>
         <p className="text-gray-500 text-sm">Stay tuned for upcoming updates and tools to manage your funds even better!</p>
       </section>
