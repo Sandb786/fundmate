@@ -27,7 +27,7 @@ export default function DashboardHome() {
       </section>
 
       {/* Dashboard Buttons */}
-      <section className="grid gap-6 grid-cols-1 sm:grid-cols-2 px-6 bg-gray-950 p-10 rounded-3xl">
+      <section className="grid gap-6 grid-cols-1 sm:grid-cols-2 px-6 bg-gray-900 p-10 rounded-3xl">
 
         {/* Button Heading */}
         <h2 className="col-span-1 sm:col-span-2 text-2xl font-semibold text-white mb-3">
@@ -37,7 +37,7 @@ export default function DashboardHome() {
         {/* Quick Add Fund */}
         <button
           onClick={() => navigate('#')}
-          className="flex items-center gap-4 bg-gray-900 p-4 rounded-2xl shadow-lg shadow-black hover:shadow-lg transition-all active:scale-95"
+          className="flex items-center gap-4 bg-gray-950 p-4 rounded-2xl shadow-lg shadow-black hover:shadow-lg transition-all active:scale-95"
         >
           <PlusCircle className="text-blue-400 w-10 h-10" />
           <div className="text-left">
@@ -49,7 +49,7 @@ export default function DashboardHome() {
         {/* Show Fund List */}
         <button
           onClick={() => navigate('/list')}
-          className="flex items-center gap-4 bg-gray-900 p-4 rounded-2xl shadow-lg shadow-black hover:shadow-lg transition-all active:scale-95"
+          className="flex items-center gap-4 bg-gray-950 p-4 rounded-2xl shadow-lg shadow-black hover:shadow-lg transition-all active:scale-95"
         >
           <Layers3 className="text-cyan-400 w-9 h-9" />
           <div className="text-left">
@@ -61,7 +61,7 @@ export default function DashboardHome() {
         {/* Profile */}
         <button
           onClick={() => navigate('#')}
-          className="flex items-center gap-4 bg-gray-900 p-4 rounded-2xl shadow-lg shadow-black hover:shadow-lg transition-all active:scale-95"
+          className="flex items-center gap-4 bg-gray-950 p-4 rounded-2xl shadow-lg shadow-black hover:shadow-lg transition-all active:scale-95"
         >
           <User className="text-purple-400 w-10 h-10" />
           <div className="text-left">
@@ -73,7 +73,7 @@ export default function DashboardHome() {
         {/* Backup */}
         <button
           onClick={() => toast.error('Backup feature coming soon!')}
-          className="flex items-center gap-4 bg-gray-900 p-4 rounded-2xl shadow-lg shadow-black hover:shadow-lg transition-all active:scale-95"
+          className="flex items-center gap-4 bg-gray-950 p-4 rounded-2xl shadow-lg shadow-black hover:shadow-lg transition-all active:scale-95"
         >
           <DatabaseBackup className="text-gray-500 w-10 h-10" />
           <div className="text-left">
@@ -85,17 +85,17 @@ export default function DashboardHome() {
       </section>
 
       {/* Mobile-Only Extra Section (To fill empty space on small screens) */}
-      <section className="block sm:hidden text-center mt-8 px-6">
+      <section className="block sm:hidden text-center mt-5 px-6">
         <h2 className="text-lg text-gray-300 mb-2">More Features Coming Soon 🚀</h2>
         <p className="text-gray-500 text-sm">Stay tuned for upcoming updates and tools to manage your funds even better!</p>
       </section>
 
-      {/* Optional Mobile-Only Illustration (Placeholder image path, change it to your own image if needed) */}
+      {/* Optional Mobile-Only Illustration (Placeholder image path, change it to your own image if needed)
       <div className="block sm:hidden mt-6 px-6">
         <div className="bg-gray-800 rounded-2xl py-10">
           <p className="text-gray-500 text-sm">[Optional Graphic Placeholder]</p>
         </div>
-      </div>
+      </div> */}
 
       {/* Optional Mobile-Only Spacer */}
       <div className="block sm:hidden py-10"></div>
