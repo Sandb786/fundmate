@@ -1,13 +1,13 @@
 import { useNavigate } from 'react-router-dom';
-import { ChartSpline, User, Layers3, Search, ClipboardPlus, X, Save, ListPlus, List, ListCheck } from 'lucide-react';
+import { ChartSpline, User, Layers3, Search, ListPlus, ListCheck, Save, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 import toast, { Toaster } from 'react-hot-toast';
 import { useState, useEffect } from 'react';
 
-export default function DashbordHome() 
-{
+export default function DashbordHome() {
   const navigate = useNavigate();
   const [funds, setFunds] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [newTitle, setNewTitle] = useState('');
 
@@ -16,19 +16,30 @@ export default function DashbordHome()
       const apiData = [
         { id: 1, title: "January Fund 2025", entries: 12, date: "01 Jan 2025" },
         { id: 2, title: "February Fund 2025", entries: 8, date: "01 Feb 2025" },
-        { id: 3, title: "March Fund 2025", entries: 15, date: "01 Mar 2025" }
+        { id: 3, title: "March Fund 2025", entries: 15, date: "01 Mar 2025" },
+        { id: 4, title: "April Fund 2025", entries: 10, date: "01 Apr 2025" },
+        { id: 5, title: "May Fund 2025", entries: 20, date: "01 May 2025" },
+        { id: 6, title: "June Fund 2025", entries: 18, date: "01 Jun 2025" },
+        { id: 7, title: "July Fund 2025", entries: 22, date: "01 Jul 2025" },
+        { id: 8, title: "August Fund 2025", entries: 14, date: "01 Aug 2025" },
+        { id: 9, title: "September Fund 2025", entries: 16, date: "01 Sep 2025" },
+        { id: 10, title: "October Fund 2025", entries: 19, date: "01 Oct 2025" },
+        { id: 11, title: "November Fund 2025", entries: 13, date: "01 Nov 2025" },
+        { id: 12, title: "December Fund 2025", entries: 17, date: "01 Dec 2025" }
+        
       ];
       setFunds(apiData);
     };
     fetchFunds();
-  }, []);
+  }, [funds]);
 
   const handleCardClick = (id) => {
     toast.success(`Opening Fund ID: ${id}`);
     // navigate(`/fund/${id}`);
   };
 
-  const handleAddNewFund = () => {
+  const handleAddNewFund = () => 
+  {
     const today = new Date();
     const formattedDate = today.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
 
@@ -44,6 +55,9 @@ export default function DashbordHome()
     setShowModal(false);
     setNewTitle('');
   };
+
+  // Filtered List Based on Search Query
+  const filteredFunds = funds.filter( fund =>fund.title.toLowerCase().includes(searchQuery.toLowerCase()) );
 
   return (
     <div className="min-h-screen bg-black text-gray-100 flex flex-col relative">
@@ -72,11 +86,12 @@ export default function DashbordHome()
             <input
               type="text"
               placeholder="Search funds..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               className="bg-transparent text-sm text-gray-100 outline-none w-full"
             />
           </div>
 
-          {/* New Fund Button */}
           <button
             onClick={() => setShowModal(true)}
             className='bg-blue-600 p-1 rounded-md cursor-pointer shadow-lg active:scale-90 transition-all'
@@ -88,25 +103,29 @@ export default function DashbordHome()
         {/* Fund List */}
         <div className='overflow-y-auto h-[calc(100vh-220px)] px-5'>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 px-5 pb-24">
-            {funds.map((fund, index) => (
-              <motion.div
-                key={fund.id}
-                onClick={() => handleCardClick(fund.id)}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05, duration: 0.4 }}
-                className="bg-[#000000] rounded-2xl p-5 shadow-lg cursor-pointer hover:scale-[1.02] active:scale-95 transition-all border border-black"
-              >
-                <div className="flex items-center gap-3 mb-3">
-                  <Layers3 className="text-blue-400 w-6 h-6" />
-                  <h3 className="text-lg font-semibold text-white">{fund.title}</h3>
-                </div>
-                <div className="flex justify-between items-center text-sm text-gray-400">
-                  <p>Entries: <span className="font-medium text-gray-200">{fund.entries}</span></p>
-                  <p>{fund.date}</p>
-                </div>
-              </motion.div>
-            ))}
+            {filteredFunds.length > 0 ? (
+              filteredFunds.map((fund, index) => (
+                <motion.div
+                  key={fund.id}
+                  onClick={() => handleCardClick(fund.id)}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.05, duration: 0.4 }}
+                  className="bg-[#000000] rounded-2xl p-5 shadow-lg cursor-pointer hover:scale-[1.02] active:scale-95 transition-all border border-black"
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    <Layers3 className="text-blue-400 w-6 h-6" />
+                    <h3 className="text-lg font-semibold text-white">{fund.title}</h3>
+                  </div>
+                  <div className="flex justify-between items-center text-sm text-gray-400">
+                    <p>Entries: <span className="font-medium text-gray-200">{fund.entries}</span></p>
+                    <p>{fund.date}</p>
+                  </div>
+                </motion.div>
+              ))
+            ) : (
+              <p className="text-center text-gray-500 py-10">No funds found.</p>
+            )}
           </div>
         </div>
 
@@ -128,8 +147,8 @@ export default function DashbordHome()
               className="bg-gray-900 shadow-black rounded-xl p-6 w-full max-w-sm text-center shadow-lg"
             >
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-semibold text-white flex gap-2"><ListCheck/> Add New List</h3>
-                <X className="text-gray-400 w-5 h-5 cursor-pointer " onClick={() => setShowModal(false)} />
+                <h3 className="text-lg font-semibold text-white flex gap-2"><ListCheck /> Add New List</h3>
+                <X className="text-gray-400 w-5 h-5 cursor-pointer" onClick={() => setShowModal(false)} />
               </div>
 
               <input
@@ -137,7 +156,7 @@ export default function DashbordHome()
                 placeholder="Enter Fund Name"
                 value={newTitle}
                 onChange={(e) => setNewTitle(e.target.value)}
-                className="w-full px-4 py-2 mb-4 rounded bg-black  text-gray-100 outline-none"
+                className="w-full px-4 py-2 mb-4 rounded bg-black text-gray-100 outline-none"
               />
 
               <button
@@ -151,7 +170,6 @@ export default function DashbordHome()
             </motion.div>
           </div>
         )}
-
       </div>
     </div>
   );
