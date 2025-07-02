@@ -20,28 +20,26 @@ export default function DashboardHome() {
         <User className="text-gray-400 w-7 h-7" />
       </header>
 
-       {/* Welcome Message */}
+      {/* Welcome Message */}
       <section className="px-6 py-8">
         <h2 className="text-2xl font-bold mb-1 text-white">Welcome Back 👋</h2>
-
         <p className="text-gray-400 text-sm">Manage your funds quickly and efficiently.</p>
       </section>
 
-
       {/* Dashboard Buttons */}
-      <section className="grid gap-6 grid-cols-2 px-6 bg-gray-950 p-10 rounded-3xl">
+      <section className="grid gap-6 grid-cols-1 sm:grid-cols-2 px-6 bg-gray-950 p-10 rounded-3xl">
 
-        {/* Button Hadding */}
-        <h2 className="col-span-2 text-2xl font-semibold text-white mb-3">
+        {/* Button Heading */}
+        <h2 className="col-span-1 sm:col-span-2 text-2xl font-semibold text-white mb-3">
           Quick Actions →
         </h2>
 
         {/* Quick Add Fund */}
         <button
           onClick={() => navigate('#')}
-          className="md:flex items-center gap-4 bg-gray-900 p-4 rounded-2xl shadow-lg shadow-black hover:shadow-lg transition-all active:scale-95"
+          className="flex items-center gap-4 bg-gray-900 p-4 rounded-2xl shadow-lg shadow-black hover:shadow-lg transition-all active:scale-95"
         >
-          <PlusCircle className="text-blue-400 w-10 h-10 mb-5 md:mb-0" />
+          <PlusCircle className="text-blue-400 w-10 h-10" />
           <div className="text-left">
             <h3 className="text-white text-xl font-medium">Quick Add Fund</h3>
             <p className="text-gray-400 text-sm">Create a new fund instantly</p>
@@ -51,22 +49,21 @@ export default function DashboardHome() {
         {/* Show Fund List */}
         <button
           onClick={() => navigate('/list')}
-          className="md:flex items-center gap-4 bg-gray-900  p-4 rounded-2xl shadow-lg shadow-black hover:shadow-lg transition-all active:scale-95"
+          className="flex items-center gap-4 bg-gray-900 p-4 rounded-2xl shadow-lg shadow-black hover:shadow-lg transition-all active:scale-95"
         >
-          <Layers3 className="text-cyan-400  w-9 h-9 mb-5 md:mb-0" />
+          <Layers3 className="text-cyan-400 w-9 h-9" />
           <div className="text-left">
             <h3 className="text-white text-xl font-medium">Show Fund List</h3>
             <p className="text-gray-400 text-sm">View and manage all entries</p>
-
           </div>
         </button>
 
         {/* Profile */}
         <button
           onClick={() => navigate('#')}
-          className="md:flex items-center gap-4 bg-gray-900  p-4 rounded-2xl shadow-lg shadow-black hover:shadow-lg transition-all active:scale-95"
+          className="flex items-center gap-4 bg-gray-900 p-4 rounded-2xl shadow-lg shadow-black hover:shadow-lg transition-all active:scale-95"
         >
-          <User className="text-purple-400 w-10 h-10 mb-5 md:mb-0" />
+          <User className="text-purple-400 w-10 h-10" />
           <div className="text-left">
             <h3 className="text-white text-xl font-medium">Profile</h3>
             <p className="text-gray-400 text-sm">Manage your personal details</p>
@@ -76,9 +73,9 @@ export default function DashboardHome() {
         {/* Backup */}
         <button
           onClick={() => toast.error('Backup feature coming soon!')}
-          className="md:flex items-center gap-4 bg-gray-900 p-4 rounded-2xl shadow-lg shadow-black hover:shadow-lg transition-all active:scale-95"
+          className="flex items-center gap-4 bg-gray-900 p-4 rounded-2xl shadow-lg shadow-black hover:shadow-lg transition-all active:scale-95"
         >
-          <DatabaseBackup className="text-gray-500 w-10 h-10 mb-5 md:mb-0" />
+          <DatabaseBackup className="text-gray-500 w-10 h-10" />
           <div className="text-left">
             <h3 className="text-gray-500 text-xl font-medium">BackUp Data</h3>
             <p className="text-gray-400 text-sm">Backup your Data to Drive.</p>
@@ -86,6 +83,22 @@ export default function DashboardHome() {
         </button>
 
       </section>
+
+      {/* Mobile-Only Extra Section (To fill empty space on small screens) */}
+      <section className="block sm:hidden text-center mt-8 px-6">
+        <h2 className="text-lg text-gray-300 mb-2">More Features Coming Soon 🚀</h2>
+        <p className="text-gray-500 text-sm">Stay tuned for upcoming updates and tools to manage your funds even better!</p>
+      </section>
+
+      {/* Optional Mobile-Only Illustration (Placeholder image path, change it to your own image if needed) */}
+      <div className="block sm:hidden mt-6 px-6">
+        <div className="bg-gray-800 rounded-2xl py-10">
+          <p className="text-gray-500 text-sm">[Optional Graphic Placeholder]</p>
+        </div>
+      </div>
+
+      {/* Optional Mobile-Only Spacer */}
+      <div className="block sm:hidden py-10"></div>
 
       {/* Footer */}
       <footer className="mt-auto px-6 py-6 text-center text-xs text-gray-500">
