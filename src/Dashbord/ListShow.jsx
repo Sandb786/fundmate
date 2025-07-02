@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { ChartSpline, User, Layers3, Search, ListFilter, ClipboardPlus, } from 'lucide-react';
+import { ChartSpline, User, Layers3, Search, ListPlus, } from 'lucide-react';
 import { motion } from 'framer-motion';
 import toast, { Toaster } from 'react-hot-toast';
 import { useState, useEffect } from 'react';
@@ -67,15 +67,8 @@ export default function ListShow() {
               className="bg-transparent text-sm text-gray-100 outline-none w-full"
             />
           </div>
-
-          {/* <button
-            onClick={() => navigate('/add-fund')}
-            className="border-3 border-cyan-700 text-white text-sm  font-semibold px-2 py-2 rounded-2xl transition-all"
-          >
-            + NEW
-          </button> */}
-          <button className='bg-cyan-700 p-1.5 rounded-md cursor-pointer shadow-lg active:scale-95 transition-all'>
-            <ClipboardPlus className="text-white w-6 h-6"
+          <button className='bg-blue-600 p-1 rounded-md cursor-pointer shadow-lg active:scale-95 transition-all'>
+            <ListPlus className="text-white w-6 h-6"
             />
           </button>
         </div>

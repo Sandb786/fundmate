@@ -4,9 +4,10 @@ import { ThemeProvider } from "@material-tailwind/react";
 
 import Index from './Website/Index';
 import AuthPages from './Website/AuthPages';
-import EmailVerification from './Website/EmailVerification';
-import DashboardHome from "./Dashbord/DashbordHome";
+import EmailVerification from './Website/EmailVerification'
 import ListShow from "./Dashbord/ListShow";
+import DashbordHome from "./Dashbord/DashbordHome";
+
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
           <Route path="/verify-email" element={<EmailVerification />} />
 
 
-          <Route path="/dashboard" element={<DashboardHome />} />
+          <Route path="/dashboard" element={<DashbordHome />} />
           <Route path="/list" element={<ListShow />} />
 
         </Routes>
