@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { PlusCircle, Layers3, User, ChartSpline, DatabaseBackup } from 'lucide-react';
+import { PlusCircle, Layers3, User, ChartSpline, DatabaseBackup, ChartPie } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 
 export default function DashboardHome() {
@@ -20,11 +20,12 @@ export default function DashboardHome() {
         <User className="text-gray-400 w-7 h-7" />
       </header>
 
-      <h2 className='font-semibold text-center text-2xl'>Dashbord</h2>
+    
 
       {/* Welcome Message */}
-      <section className="px-6 py-8">
-        <h2 className="text-2xl font-bold mb-1 text-white">Welcome Back 👋</h2>
+      <section className="px-6 py-6">
+        <h2 className="text-2xl font-semibold mb-5 text-white flex gap-3 items-center justify-center "> Fundmate Dashboard <ChartPie/></h2>
+        <h2 className="text-2xl font-thine mb-1 text-white">Welcome Back 👋</h2>
         <p className="text-gray-400 text-sm">Manage your funds quickly and efficiently.</p>
       </section>
 
