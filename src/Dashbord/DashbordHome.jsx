@@ -137,7 +137,7 @@ export default function DashbordHome()
                 placeholder="Enter Fund Name"
                 value={newTitle}
                 onChange={(e) => setNewTitle(e.target.value)}
-                className="w-full px-4 py-2 mb-4 rounded bg-black text-gray-100 outline-none"
+                className="w-full px-4 py-2 mb-4 rounded bg-gray-900 text-gray-100 outline-none"
               />
 
               <button
