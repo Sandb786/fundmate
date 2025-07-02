@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { ChartSpline, User, Layers3, Search, ListPlus, ListCheck, Save, X } from 'lucide-react';
+import { ChartSpline, User, Layers3, Search, ListPlus, ListCheck, Save, X, House } from 'lucide-react';
 import { motion } from 'framer-motion';
 import toast, { Toaster } from 'react-hot-toast';
 import { useState, useEffect } from 'react';
@@ -59,7 +59,7 @@ export default function ListShow() {
           <ChartSpline className="text-blue-400 w-10 h-10" />
           <h1 className="text-xl font-bold text-blue-400">FundMate</h1>
         </div>
-        <User className="text-gray-400 w-8 h-8" />
+        <House className="text-gray-400 w-8 h-8" onClick={()=>navigate("/dashboard")}/>
       </header>
 
       {/* Title */}
