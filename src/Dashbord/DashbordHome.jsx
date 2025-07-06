@@ -12,7 +12,7 @@ export default function DashboardHome() {
       <Toaster position="top-center" toastOptions={{ style: { background: '#1a1a1a', color: '#fff' } }} />
 
       {/* Header */}
-      <header className="flex justify-between items-center px-5 py-4 sticky top-0 bg-black z-20 border-b border-gray-950">
+      <header className="flex justify-between items-center px-5 py-4 sticky top-0 bg-black z-20 border-b border-gray-900">
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/')}>
           <ChartSpline className="text-blue-400 w-8 h-8" />
           <h1 className="text-xl font-bold text-blue-400">FundMate</h1>

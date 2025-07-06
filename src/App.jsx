@@ -7,6 +7,7 @@ import AuthPages from './Website/AuthPages';
 import EmailVerification from './Website/EmailVerification'
 import ListShow from "./Dashbord/ListShow";
 import DashbordHome from "./Dashbord/DashbordHome";
+import FundDetail from "./Detail/FundDetail";
 
 
 function App() {
@@ -24,6 +25,8 @@ function App() {
 
           <Route path="/dashboard" element={<DashbordHome />} />
           <Route path="/list" element={<ListShow />} />
+
+          <Route path="/fund-detail" element={<FundDetail/>} />
 
         </Routes>
       </Router>

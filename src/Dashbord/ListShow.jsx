@@ -25,7 +25,7 @@ export default function ListShow() {
 
   const handleCardClick = (id) => {
     toast.success(`Opening Fund ID: ${id}`);
-    // navigate(`/fund/${id}`);
+    navigate(`/fund-detail`);
   };
 
   const handleAddNewFund = () => 
