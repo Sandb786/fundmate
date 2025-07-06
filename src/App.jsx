@@ -5,9 +5,9 @@ import { ThemeProvider } from "@material-tailwind/react";
 import Index from './Website/Index';
 import AuthPages from './Website/AuthPages';
 import EmailVerification from './Website/EmailVerification'
-import ListShow from "./Dashbord/ListShow";
 import DashbordHome from "./Dashbord/DashbordHome";
 import FundDetail from "./Detail/FundDetail";
+import ListFund from "./Dashbord/ListFund";
 
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
 
 
           <Route path="/dashboard" element={<DashbordHome />} />
-          <Route path="/list" element={<ListShow />} />
+          <Route path="/list" element={<ListFund />} />
 
           <Route path="/fund-detail" element={<FundDetail/>} />
 

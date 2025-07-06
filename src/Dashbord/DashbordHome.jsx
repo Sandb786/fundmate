@@ -13,7 +13,7 @@ export default function DashboardHome() {
 
       {/* Header */}
       <header className="flex justify-between items-center px-5 py-4 sticky top-0 bg-black z-20 border-b border-gray-900">
-        <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/')}>
+        <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate(-1)}>
           <ChartSpline className="text-blue-400 w-8 h-8" />
           <h1 className="text-xl font-bold text-blue-400">FundMate</h1>
         </div>

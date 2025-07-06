@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import toast, { Toaster } from 'react-hot-toast';
 import { useState, useEffect } from 'react';
 
-export default function ListShow() {
+export default function ListFund() {
   const navigate = useNavigate();
   const [funds, setFunds] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -55,11 +55,11 @@ export default function ListShow() {
 
       {/* Header */}
       <header className="flex justify-between items-center px-5 py-4 sticky top-0 bg-black z-20">
-        <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/')}>
+        <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/')} title='Home Page'>
           <ChartSpline className="text-blue-400 w-10 h-10" />
           <h1 className="text-xl font-bold text-blue-400">FundMate</h1>
         </div>
-        <House className="text-gray-400 w-8 h-8" onClick={()=>navigate("/dashboard")}/>
+        <House className="text-gray-400 w-8 h-8 cursor-pointer" onClick={()=>navigate(-1)} />
       </header>
 
       {/* Title */}
