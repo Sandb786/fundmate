@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { PlusCircle, Layers3, User, ChartSpline, DatabaseBackup, ChartPie } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 
-export default function DashboardHome() {
+export default function DashboardHome() 
+{
   const navigate = useNavigate();
-
+ 
   return (
     <div className="min-h-screen  bg-black text-gray-100 flex flex-col">
 

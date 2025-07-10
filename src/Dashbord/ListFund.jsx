@@ -23,9 +23,9 @@ export default function ListFund() {
     fetchFunds();
   }, []);
 
-  const handleCardClick = (id) => {
-    toast.success(`Opening Fund ID: ${id}`);
-    navigate(`/fund-detail`);
+  const handleCardClick = (fund) => {
+    toast.success(`Opening Fund ID: ${fund.title}`);
+    navigate(`/fund-detail`, { state: { fundData: fund } });
   };
 
   const handleAddNewFund = () => 
@@ -97,14 +97,14 @@ export default function ListFund() {
               filteredFunds.map((fund, index) => (
                 <motion.div
                   key={fund.id}
-                  onClick={() => handleCardClick(fund.id)}
+                  onClick={() => handleCardClick(fund)}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.05, duration: 0.4 }}
                   className="bg-[#000000] rounded-2xl p-5 shadow-lg cursor-pointer hover:scale-[1.02] active:scale-95 transition-all border border-black"
                 >
                   <div className="flex items-center gap-3 mb-3">
-                    <Layers3 className="text-blue-400 w-6 h-6" />
+                    <Layers3 className="text-blue-400 w-8 h-8" />
                     <h3 className="text-lg font-thine text-white">{fund.title}</h3>
                   </div>
                   <div className="flex justify-between items-center text-sm text-gray-400">
