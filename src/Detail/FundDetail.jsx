@@ -104,7 +104,7 @@ const handleDeleteEntry = (id) => {
 
       {/* Fixed Action Buttons */}
       <div className="fixed bottom-0 left-0 right-0 bg-black rounded-t-xl  ">
-        <ActionButton onAddClick={() => setShowModal(true)} />
+        <ActionButton onAddClick={() => setShowModal(true)}  entries={entries}/>
       </div>
 
 

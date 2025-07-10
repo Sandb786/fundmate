@@ -1,7 +1,8 @@
 import React from 'react';
+import exportToPdf from '../Features/ExportToPdf';
 import { ListPlus, FileText, ChartSpline, NotepadText } from 'lucide-react';
 
-export default function ActionButton({ onAddClick }) 
+export default function ActionButton({ onAddClick ,entries}) 
 {
 
   return (
@@ -16,8 +17,8 @@ export default function ActionButton({ onAddClick })
       </button>
 
       <button
-        onClick={() => console.log('Export')}
         className="bg-gradient-to-b from-gray-800 cursor-pointer to-gray-900 shadow-sm shadow-gray-700 px-3 py-1.5 rounded-md active:scale-90 transition-all flex items-center gap-1"
+        onClick={() => exportToPdf(entries)}
       >
         <FileText className="w-5 h-5 text-red-400" />
         <span className="text-sm text-white">Export</span>

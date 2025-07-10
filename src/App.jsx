@@ -8,6 +8,7 @@ import EmailVerification from './Website/EmailVerification'
 import DashbordHome from "./Dashbord/DashbordHome";
 import FundDetail from "./Detail/FundDetail";
 import ListFund from "./Dashbord/ListFund";
+import Demo from "./Features/Demo";
 
 
 function App() {
@@ -27,6 +28,8 @@ function App() {
           <Route path="/list" element={<ListFund />} />
 
           <Route path="/fund-detail" element={<FundDetail/>} />
+
+          <Route path="/demo" element={<Demo/>} />
 
         </Routes>
       </Router>
