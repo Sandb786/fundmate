@@ -67,6 +67,7 @@ export default function FundDetail()
 
 const handleDeleteEntry = (id) => {
   setEntries(prev => prev.filter(entry => entry.id !== id));
+  toast.success('Entry deleted successfully!');
 };
 
 

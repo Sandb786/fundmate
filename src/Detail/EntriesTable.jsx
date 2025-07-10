@@ -1,6 +1,7 @@
 import { CircleChevronDown, CircleChevronUp, Pencil } from 'lucide-react';
 import React, { useState } from 'react';
 import UpdateEntry from './UpdateEntry';
+import toast from 'react-hot-toast';
 
 export default function EntriesTable({ entries = [], onUpdate, onDelete }) {
   const [editingEntry, setEditingEntry] = useState(null);
@@ -8,6 +9,7 @@ export default function EntriesTable({ entries = [], onUpdate, onDelete }) {
   const handleSave = (note, amount) => {
     onUpdate(editingEntry.id, note, amount);
     setEditingEntry(null);
+    toast.success('Entry updated successfully!');
   };
 
   return (

@@ -11,7 +11,8 @@ export default function UpdateEntry({ initialNote, initialAmount, onSave, onClos
     setAmount(initialAmount !== undefined ? initialAmount.toString() : '');
   }, [initialNote, initialAmount]);
 
-  const handleSave = () => {
+  const handleSave = () => 
+{
     if (!note || !amount) return;
     onSave(note, parseFloat(amount));
   };
