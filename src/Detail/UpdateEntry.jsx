@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Save, X, Trash2 } from 'lucide-react';
+import { Save, X, Trash2, FilePen, CircleX } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function UpdateEntry({ initialNote, initialAmount, onSave, onClose, onDelete }) {
@@ -30,8 +30,12 @@ export default function UpdateEntry({ initialNote, initialAmount, onSave, onClos
         className="bg-gray-900 rounded-xl p-6 w-full max-w-sm text-center shadow-lg"
       >
         <div className="flex justify-between items-center mb-4">
+
+          <span className='flex items-center gap-2'>
+            <FilePen/>
           <h3 className="text-lg font-semibold text-white">Edit Entry</h3>
-          <X className="text-gray-400 w-5 h-5 cursor-pointer" onClick={onClose} />
+          </span>
+          <CircleX className="text-gray-400 w-5 h-5 cursor-pointer" onClick={onClose} />
         </div>
 
         <input
@@ -53,14 +57,14 @@ export default function UpdateEntry({ initialNote, initialAmount, onSave, onClos
         <div className="flex justify-between gap-2">
           <button
             onClick={handleDelete}
-            className="flex-grow bg-red-600 text-white py-2 rounded-lg transition hover:bg-red-700"
+            className="flex-grow bg-red-700 text-white py-2 rounded-lg transition hover:bg-red-700"
           >
             <Trash2 className="inline mr-1 w-4 h-4" /> Delete
           </button>
           <button
             onClick={handleSave}
             disabled={!note.trim() || !amount.trim()}
-            className="flex-grow bg-green-600 text-white py-2 rounded-lg transition disabled:opacity-50"
+            className="flex-grow bg-blue-700 text-white py-2 rounded-lg transition disabled:opacity-50"
           >
             <Save className="inline mr-2 w-4 h-4" /> Save
           </button>
