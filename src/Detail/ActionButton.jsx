@@ -19,8 +19,7 @@ export default function ActionButton({ onAddClick ,entries})
       <button
         className="bg-gradient-to-b from-gray-800 cursor-pointer to-gray-900 shadow-sm shadow-gray-700 px-3 py-1.5 rounded-md active:scale-90 transition-all flex items-center gap-1"
         onClick={() => exportToPdf(entries)}
-      >
-        <FileText className="w-5 h-5 text-red-400" />
+      >        <FileText className="w-5 h-5 text-red-400" />
         <span className="text-sm text-white">Export</span>
       </button>
 
@@ -45,7 +44,6 @@ export default function ActionButton({ onAddClick ,entries})
 }
 
 
-// { id: 1, note: 'Initial Fund', date: '01 Jan 2025', amount: 1000 },
     // { id: 2, note: 'Monthly Contribution', date: '01 Feb 2025', amount: 500 },
     // { id: 3, note: 'Emergency Fund', date: '15 Feb 2025', amount: 200 },
     // { id: 4, note: 'Investment Return', date: '28 Feb 2025', amount: 300 },
