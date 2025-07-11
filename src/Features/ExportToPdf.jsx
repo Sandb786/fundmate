@@ -1,5 +1,6 @@
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable'; // ✅ Import autoTable separately
+import toast from 'react-hot-toast';
 
 export default function exportToPdf(entries = []) {
   const doc = new jsPDF();
@@ -68,5 +69,7 @@ export default function exportToPdf(entries = []) {
 
     // Save
     doc.save('FundMate_Report.pdf');
+
+    toast.success("PDF Exported Successfuly...");
   }
 }
