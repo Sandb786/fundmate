@@ -1,9 +1,11 @@
+import { MoveLeft } from 'lucide-react';
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, PieChart, Pie, Cell, Legend } from 'recharts';
 
 export default function FundAnalysis() 
 {
+  const navigate=useNavigate()
   const location=useLocation();
   const entries=location.state?.Entries;
 
@@ -26,17 +28,17 @@ export default function FundAnalysis()
 
   return (
     <div className="p-5 text-white bg-black min-h-screen space-y-10">
-      <h2 className="text-xl font-bold mb-4">📊 Fund Analysis</h2>
+      <h2 className="text-xl font-bold mb-6 text-center flex gap-10 items-center"><MoveLeft onClick={()=>navigate(-1)}/> 📊 Fund Analysis</h2>
 
       {/* Line Chart */}
-      <div className="bg-gray-900 p-5 rounded-lg shadow">
+      <div className="bg-gray-900 p-2 rounded-lg shadow">
         <h3 className="text-lg font-semibold mb-3">Amount Over Time</h3>
-        <ResponsiveContainer width="100%" height={300}>
+        <ResponsiveContainer width="100%" height={280}>
           <LineChart data={lineData}>
-            <XAxis dataKey="date" />
-            <YAxis />
+            <XAxis dataKey="date" tick={{ fontSize: 8 }}/>
+            <YAxis tick={{ fontSize: 10 }}/>
             <Tooltip />
-            <Line type="monotone" dataKey="amount" stroke="#4F46E5" strokeWidth={2} />
+            <Line type="monotone" dataKey="amount"  stroke="#4F46E5" strokeWidth={2} />
           </LineChart>
         </ResponsiveContainer>
       </div>
