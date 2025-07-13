@@ -9,6 +9,7 @@ import DashbordHome from "./Dashbord/DashbordHome";
 import FundDetail from "./Detail/FundDetail";
 import ListFund from "./Dashbord/ListFund";
 import Demo from "./Features/Demo";
+import FundAnalysis from "./Features/FundAnalysis";
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path="/fund-detail" element={<FundDetail/>} />
 
           <Route path="/demo" element={<Demo/>} />
+          <Route path="/analysis" element={<FundAnalysis/>} />
 
         </Routes>
       </Router>

@@ -15,11 +15,13 @@ export default function FundDetail()
 
   const [showModal, setShowModal] = useState(false);
   const [entries, setEntries] = useState([
-    { id: 1, note: "Initial Fund", date: "01 Jan 2025", amount: 6000.0 },
+    { id: 1, note: "Initial Fund", date: "01 Jan 2025", amount: 2000.0 },
     { id: 2, note: "First Expense", date: "02 Jan 2025", amount: -1500.0 },
     { id: 3, note: "Second Expense", date: "03 Jan 2025", amount: 2000.0 },
     { id: 4, note: "Third Expense", date: "04 Jan 2025", amount: -1000.0 },
     { id: 5, note: "Fourth Expense", date: "05 Jan 2025", amount: 500.0 },
+    { id: 5, note: "Fourth Expense", date: "06 Jan 2025", amount: 1500.0 },
+    { id: 5, note: "Fourth Expense", date: "07 Jan 2025", amount: 2500.0 }
   ]);
 
   const [note, setNote] = useState('');
@@ -80,7 +82,7 @@ const handleDeleteEntry = (id) => {
         }}
       />
 
-
+ 
       {/* Fixed Header */}
       <header className="fixed top-0 left-0 right-0 z-20 px-5 py-4 flex justify-between items-center bg-gray-950 ">
         <div className="flex items-center gap-2">
