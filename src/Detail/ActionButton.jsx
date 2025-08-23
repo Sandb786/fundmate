@@ -3,7 +3,8 @@ import exportToPdf from '../Features/ExportToPdf';
 import { ListPlus, FileText, ChartSpline, NotepadText, Settings } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-export default function ActionButton({ onAddClick, entries,onSettingsClick }) {
+export default function ActionButton({ onAddClick, entries,onSettingsClick }) 
+{
   const navigate = useNavigate();
 
   return (

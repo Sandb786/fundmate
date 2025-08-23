@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Save, X, Trash2, FilePen, CircleX } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-export default function UpdateEntry({ initialNote, initialAmount, onSave, onClose, onDelete }) {
+export default function UpdateEntry({ initialNote, initialAmount, onSave, onClose, onDelete }) 
+{
+  
   const [note, setNote] = useState('');
   const [amount, setAmount] = useState('');
 
@@ -17,7 +19,8 @@ export default function UpdateEntry({ initialNote, initialAmount, onSave, onClos
     onSave(note, parseFloat(amount));
   };
 
-  const handleDelete = () => {
+  const handleDelete = () => 
+  {
     onDelete();
   };
 

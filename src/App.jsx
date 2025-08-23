@@ -10,6 +10,12 @@ import FundDetail from "./Detail/FundDetail";
 import ListFund from "./Dashbord/ListFund";
 import Demo from "./Features/Demo";
 import FundAnalysis from "./Features/FundAnalysis";
+import LoddingPage from "./LoddingPage";
+import Success_Email from "./Website/Success_Email";
+import QuickAddFund from "./Dashbord/QuickAddFund";
+import Profile from "./Profile_Section/Profile";
+import ForgotPasswordPopup from "./Website/ForgotPasswordPopup";
+
 
 
 function App() {
@@ -17,24 +23,32 @@ function App() {
     <ThemeProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<Index />} />
+
+          <Route path="/" element={<LoddingPage />} />
+          
+          <Route path="/index" element={<Index />} />
 
           <Route path="/authSingUp" element={<AuthPages type={false}/>} />
           <Route path="/authLogin" element={<AuthPages type={true}/>} />
 
           <Route path="/verify-email" element={<EmailVerification />} />
+          <Route path="/verify-success" element={<Success_Email />} />
 
 
           <Route path="/dashboard" element={<DashbordHome />} />
           <Route path="/list" element={<ListFund />} />
+          <Route path="/quick-add" element={<QuickAddFund />} />
 
           <Route path="/fund-detail" element={<FundDetail/>} />
 
-          <Route path="/demo" element={<Demo/>} />
+          <Route path="/profile" element={<Profile/>} />
+          
+          <Route path="/forgatePassword" element={<ForgotPasswordPopup/>} />
+
           <Route path="/analysis" element={<FundAnalysis/>} />
 
         </Routes>
-      </Router>
+      </Router> 
     </ThemeProvider>
   );
 }

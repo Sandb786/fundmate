@@ -17,7 +17,8 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-black text-gray-100 flex flex-col">
-      <Toaster />
+     <Toaster position="top-center"  toastOptions={{ style: { background: '#1a1a1a', color: '#fff' } }} />
+
 
       {/* Header */}
       <header className="bg-[#0d0d0d] shadow-md px-6 py-4 sticky top-0 z-10">

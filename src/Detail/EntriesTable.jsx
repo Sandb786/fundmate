@@ -1,24 +1,36 @@
 import { CircleChevronDown, CircleChevronUp, Pencil } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
 import React, { useState } from 'react';
 import UpdateEntry from './UpdateEntry';
 import toast from 'react-hot-toast';
 
 export default function EntriesTable({ entries = [], onUpdate, onDelete }) {
+
   const [editingEntry, setEditingEntry] = useState(null);
 
+
   const handleSave = (note, amount) => {
-    onUpdate(editingEntry.id, note, amount);
+    onUpdate(editingEntry.entrieId, note, amount, editingEntry.date);
     setEditingEntry(null);
-    toast.success('Entry updated successfully!');
   };
 
   return (
     <div className="space-y-3 px-5 py-4">
+
+  
       {entries.length === 0 ? (
         <p className="text-gray-500 text-center">No entries yet.</p>
       ) : (
-        entries.map((entry) => (
-          <div key={entry.id} className="bg-gray-950 rounded-lg p-5 flex justify-between items-center" onClick={() => setEditingEntry(entry)}>
+        entries.map((entry, index) => (
+          <motion.div
+           initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            key={index}
+            className="bg-gray-950 rounded-lg p-5 flex justify-between items-center cursor-pointer"
+            onClick={() => setEditingEntry(entry)}
+          >
             <div className='flex items-center gap-3'>
               <span>
                 {entry.amount >= 0
@@ -37,7 +49,8 @@ export default function EntriesTable({ entries = [], onUpdate, onDelete }) {
                 ₹ {parseFloat(entry.amount).toFixed(2)}
               </span>
             </div>
-          </div>
+          </motion.div>
+
         ))
       )}
 
@@ -47,7 +60,7 @@ export default function EntriesTable({ entries = [], onUpdate, onDelete }) {
           initialAmount={editingEntry.amount}
           onSave={handleSave}
           onDelete={() => {
-            onDelete(editingEntry.id);
+            onDelete(editingEntry.entrieId);
             setEditingEntry(null);
           }}
           onClose={() => setEditingEntry(null)}

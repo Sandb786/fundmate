@@ -2,7 +2,8 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable'; // ✅ Import autoTable separately
 import toast from 'react-hot-toast';
 
-export default function exportToPdf(entries = []) {
+export default function exportToPdf(entries = []) 
+{
   const doc = new jsPDF();
 
   // Optional: Add Logo (synchronously or skip if error)

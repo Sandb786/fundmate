@@ -1,32 +1,59 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { ChartSpline, User, Layers3, Search, ListPlus, ListCheck, Save, X, House } from 'lucide-react';
 import { motion } from 'framer-motion';
 import toast, { Toaster } from 'react-hot-toast';
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
-export default function ListFund() {
+export default function ListFund() 
+{
   const navigate = useNavigate();
+  const location = useLocation();
+
   const [funds, setFunds] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [newTitle, setNewTitle] = useState('');
 
+  if(!location.state?.UserId)
+    {
+      return;
+    }
+
+  function fetchFunds ()
+   {
+    axios.get('http://localhost:8083/getallFunds?id=' + location.state?.UserId)
+      .then(response => {
+        // 2. Filter Funds take List Info
+        const fundListInfo = response.data.map(fund => ({
+          id: fund.id,
+          userId: fund.userId,
+          title: fund.title,
+          totalEntrie: fund.totalEntrie,
+          date: fund.date
+        }));
+        setFunds(fundListInfo);
+        // toast.success('Funds fetched!');
+      })
+      .catch(error => {
+        toast.error('Error fetching funds');
+        console.error(error);
+      });
+    }
+
+  // Api Call to fetch funds.
   useEffect(() => {
-    const fetchFunds = async () => {
-      const apiData = [
-        { id: 1, title: "January Fund 2025", entries: 12, date: "01 Jan 2025" },
-        { id: 2, title: "February Fund 2025", entries: 8, date: "01 Feb 2025" },
-        { id: 3, title: "March Fund 2025", entries: 15, date: "01 Mar 2025" },
-      ];
-      setFunds(apiData);
-    };
+
+    if (!location.state?.UserId) {
+      toast.error('No email found in state. Redirecting to login.');
+      navigate('/authLogin');
+    }
+    
     fetchFunds();
   }, []);
 
-  const handleCardClick = (fund) => {
-    toast.success(`Opening Fund ID: ${fund.title}`);
-    navigate(`/fund-detail`, { state: { fundData: fund } });
-  };
+
+  const handleCardClick = (fund) => { navigate(`/fund-detail`, { state: { fundData: fund } })};
 
   const handleAddNewFund = () => 
   {
@@ -34,20 +61,50 @@ export default function ListFund() {
     const formattedDate = today.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
 
     const newFund = {
-      id: funds.length + 1,
-      title: newTitle,
-      entries: 0,
+      title: newTitle.toLowerCase() || " New Fund",
+      userId: location.state?.UserId || '',
+      totalEntrie: 0,
       date: formattedDate,
+      entries: []
     };
 
-    setFunds([newFund, ...funds]);
-    toast.success("New Fund Added!");
+    const promise=axios.post('http://localhost:8083/addFundList', newFund);
+    toast.promise(promise, {
+      loading: 'Adding fund...',  
+    });
+    promise.then(response => {fetchFunds();})
+      .catch(error => 
+      {
+        console.error('Error adding fund:', error);
+
+        // Handle specific error for duplicate fund
+        if (error.response && error.response.status === 409) 
+        {
+          toast('List alrady exist.', {
+              icon: 'ℹ️',
+              duration: 3000,
+              style: {
+                border: '1px solid gray', // blue border
+                padding: '12px',
+                color: 'white',
+              }
+            });
+        }
+        else 
+        {
+          toast.error('Failed to add fund. Somthing went wrong.');
+        }
+
+      }
+      );
+
     setShowModal(false);
     setNewTitle('');
   };
 
   // Filtered List Based on Search Query
-  const filteredFunds = funds.filter( fund =>fund.title.toLowerCase().includes(searchQuery.toLowerCase()) );
+  const filteredFunds = funds.filter(fund => fund.title.toLowerCase().includes(searchQuery.toLowerCase()));
+
 
   return (
     <div className="min-h-screen bg-black text-gray-100 flex flex-col relative">
@@ -55,11 +112,11 @@ export default function ListFund() {
 
       {/* Header */}
       <header className="flex justify-between items-center px-5 py-4 sticky top-0 bg-black z-20">
-        <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/')} title='Home Page'>
+        <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate(-1)} title='Home Page'>
           <ChartSpline className="text-blue-400 w-10 h-10" />
           <h1 className="text-xl font-bold text-blue-400">FundMate</h1>
         </div>
-        <House className="text-gray-400 w-8 h-8 cursor-pointer" onClick={()=>navigate(-1)} />
+        <House className="text-gray-400 w-8 h-8 cursor-pointer" onClick={() => navigate(-1)} />
       </header>
 
       {/* Title */}
@@ -96,7 +153,7 @@ export default function ListFund() {
             {filteredFunds.length > 0 ? (
               filteredFunds.map((fund, index) => (
                 <motion.div
-                  key={fund.id}
+                  key={index}
                   onClick={() => handleCardClick(fund)}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -105,10 +162,10 @@ export default function ListFund() {
                 >
                   <div className="flex items-center gap-3 mb-3">
                     <Layers3 className="text-blue-400 w-8 h-8" />
-                    <h3 className="text-lg font-thine text-white">{fund.title}</h3>
+                    <h3 className="text-lg font-thine text-white capitalize">{fund.title}</h3>
                   </div>
                   <div className="flex justify-between items-center text-sm text-gray-400">
-                    <p>Entries: <span className="font-medium text-gray-200">{fund.entries}</span></p>
+                    <p>Total Entries: <span className="font-medium text-gray-400">{fund.totalEntrie}</span></p>
                     <p>{fund.date}</p>
                   </div>
                 </motion.div>

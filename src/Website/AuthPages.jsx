@@ -3,21 +3,24 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { toast, Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { ChartSpline, ArrowLeft } from 'lucide-react';
+import { Eye, EyeOff } from 'lucide-react';
+import axios from 'axios';
+import ForgotPasswordPopup from './ForgotPasswordPopup';
 
-export default function AuthPages({ type }) 
-{
+export default function AuthPages({ type }) {
 
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(type);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showForgatePassword,setShowForgatePassword]=useState(false);
 
   const [formData, setFormData] = useState({
-    fullName: '',
+    name: '',
     email: '',
     password: '',
   });
 
-  const handleChange = (e) => 
-  {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -32,19 +35,84 @@ export default function AuthPages({ type })
       ? { email: formData.email, password: formData.password }
       : formData;
 
-    console.log('Form Data:', submitData);
 
-    if (isLogin) 
-    {
-      toast.success('Login Successful');
-      navigate('/dashboard');
 
-      // Here you would typically handle login logic, e.g., API call
-      // For now, we'll just navigate to the dashboard
-    } 
-    else 
-    {
-      navigate('/verify-email', { state: { email: submitData.email } });
+    if (isLogin) {
+      const promise = axios.post('http://localhost:8083/login', submitData);
+
+      toast.promise(promise, { loading: 'Logging in...' });
+
+      promise
+        .then((response) => {
+          if (response.status === 200) {
+            toast.success('Login successful!');
+            navigate('/dashboard', { state: { userId: response.data } });
+          }
+        })
+        .catch((error) => {
+
+          // 1. if User Not Found
+          if (error.response.status === 404) {
+            toast('User Not Found. Please SingUp.', {
+              icon: 'ℹ️',
+              duration: 3000,
+              style: {
+                border: '1px solid gray', // blue border
+                padding: '12px',
+                color: 'white',
+              }
+            });
+            setIsLogin(false);
+            return;
+          }
+
+          if (error.response.status === 401) {
+            toast.error('Incorrect Password..');
+            return;
+          }
+
+          console.error('Login error:', error);
+        });
+
+      //navigate('/dashboard',{state: { email: submitData.email } });
+
+    }
+    else {
+      // Handle sign up logic
+      const promise = axios.post('http://localhost:8083/createUser', submitData);
+
+      toast.promise(
+        promise,
+        {
+          loading: 'Creating account...',
+        },)
+
+      promise
+        .then((response) => {
+          toast.success('Account created successfully!' + response.status);
+          navigate('/verify-email', { state: { email: submitData.email } });
+        })
+        .catch((error) => {
+
+          if (error.response.status == 409) {
+            toast('User already exists. Please login instead.', {
+              icon: 'ℹ️',
+              duration: 3000,
+              style: {
+                border: '1px solid gray', // blue border
+                padding: '12px',
+                color: 'white',
+              },
+            });
+            setIsLogin(true);
+            return;
+          }
+
+          toast.error('Sign up failed. Please try again.');
+          console.error('Sign up error:', error);
+        });
+
+
     }
   };
 
@@ -55,7 +123,7 @@ export default function AuthPages({ type })
       {/* Header */}
       <header className="sticky top-0 z-10 bg-[#0d0d0d] px-5 py-3 flex  justify-between shadow-md">
         <button
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/index")}
           className="text-gray-400 hover:text-gray-200 transition active:scale-95"
         >
           <ArrowLeft size={22} strokeWidth={2} />
@@ -98,9 +166,9 @@ export default function AuthPages({ type })
                   <label className="block text-sm text-gray-400 mb-1">Full Name</label>
                   <input
                     type="text"
-                    name="fullName"
+                    name="name"
                     placeholder="Your full name"
-                    value={formData.fullName}
+                    value={formData.name}
                     onChange={handleChange}
                     className="w-full bg-[#1a1a1a] text-gray-100 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500 text-base"
                     required
@@ -121,17 +189,26 @@ export default function AuthPages({ type })
                 />
               </div>
 
-              <div>
+              <div className="relative w-full max-w-md mx-auto">
+
                 <label className="block text-sm text-gray-400 mb-1">Password</label>
                 <input
-                  type="password"
-                  name="password"
-                  placeholder="********"
+                  type={showPassword ? 'text' : 'password'}
+                  name='password'
+                  className="w-full bg-[#1a1a1a] text-gray-100 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500 text-base"
+                  placeholder="Enter your password"
                   value={formData.password}
                   onChange={handleChange}
-                  className="w-full bg-[#1a1a1a] text-gray-100 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500 text-base"
-                  required
                 />
+
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-2 top-12 transform -translate-y-1/2 text-gray-600"
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+
               </div>
 
               <button
@@ -142,6 +219,9 @@ export default function AuthPages({ type })
               </button>
             </form>
 
+         
+        
+
             {/* Switch Link */}
             <p className="text-center text-sm text-gray-400 mt-8">
               {isLogin ? "Don't have an account?" : 'Already have an account?'}{' '}
@@ -151,7 +231,19 @@ export default function AuthPages({ type })
               >
                 {isLogin ? 'Sign Up' : 'Login'}
               </button>
+
+                 {/* Forgot Password */} |
+
+              <button
+                onClick={() => {setShowForgatePassword(!showForgatePassword)}}
+                className="text-blue-500 hover:underline ml-2"
+              >
+               Forget Password
+              </button>
+
             </p>
+
+
           </motion.div>
         </AnimatePresence>
       </div>
@@ -160,6 +252,9 @@ export default function AuthPages({ type })
       <footer className="text-center text-xs text-gray-500 py-4 border-t border-gray-800 bg-[#0d0d0d]">
         © 2025 FundMate. All rights reserved.
       </footer>
+
+
+      <ForgotPasswordPopup isOpen={showForgatePassword} setIsOpen={setShowForgatePassword}/>
 
     </div>
   );
