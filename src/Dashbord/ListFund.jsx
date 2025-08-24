@@ -191,7 +191,7 @@ export default function ListFund()
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
-              className="bg-gray-950 shadow-gray-900 rounded-xl p-6 w-full max-w-sm text-center shadow-lg"
+              className="bg-gray-950 shadow-gray-900 border-2 border-gray-800 rounded-xl p-6 w-full max-w-sm text-center shadow-lg"
             >
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-lg font-thine text-white flex gap-2"><ListCheck size={29}/> Add New List</h3>
