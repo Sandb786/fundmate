@@ -191,19 +191,20 @@ export default function ListFund()
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
-              className="bg-gray-900 shadow-black rounded-xl p-6 w-full max-w-sm text-center shadow-lg"
+              className="bg-gray-950 shadow-gray-900 rounded-xl p-6 w-full max-w-sm text-center shadow-lg"
             >
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-thine text-white flex gap-2"><ListCheck /> Add New List</h3>
+                <h3 className="text-lg font-thine text-white flex gap-2"><ListCheck size={29}/> Add New List</h3>
                 <X className="text-gray-400 w-5 h-5 cursor-pointer" onClick={() => setShowModal(false)} />
               </div>
 
+              <label className="block text-sm font-medium text-left text-gray-400 mb-2 mt-5">FundList: </label>
               <input
                 type="text"
                 placeholder="Enter Fund Name"
                 value={newTitle}
                 onChange={(e) => setNewTitle(e.target.value)}
-                className="w-full px-4 py-2 mb-4 rounded bg-black text-gray-100 outline-none"
+                className="w-full px-4 py-2 mb-4 rounded bg-gray-900 text-gray-100 outline-none"
               />
 
               <button

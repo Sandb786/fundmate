@@ -209,7 +209,7 @@ export default function FundDetail() {
       {showModal && (
         <div
           className="fixed inset-0 bg-gray-900/20 flex p-5 items-center justify-center z-50"
-          style={{ backdropFilter: 'blur(2px)', WebkitBackdropFilter: 'blur(2px)' }}
+          style={{ backdropFilter: 'blur(2px)', WebkitBackdropFilter: 'blur(3px)' }}
         >
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -282,7 +282,7 @@ export default function FundDetail() {
 
       {/* Settings Modal */}
       {showSettings && (
-        <div className="fixed inset-0 bg-gray-900/20 flex p-5 items-center justify-center z-50" style={{ backdropFilter: 'blur(2px)' }}>
+        <div className="fixed inset-0 bg-gray-900/20 flex p-5 items-center justify-center z-50" style={{ backdropFilter: 'blur(3px)' }}>
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
