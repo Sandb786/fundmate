@@ -38,7 +38,7 @@ export default function QuickAddFund(state)
     };
 
   // Add the new entry to the selected fund
-   const promis=axios.post(`http://localhost:8083/quickAddFund/${selectedFundTitle}`,newEntry);
+   const promis=axios.post(`https://fundmatebackend-production.up.railway.app/quickAddFund/${selectedFundTitle}`,newEntry);
     toast.promise(promis, {
       loading: 'Adding entry...',
       success: 'Entry added successfully!',

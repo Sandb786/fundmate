@@ -22,7 +22,7 @@ export default function ListFund()
 
   function fetchFunds ()
    {
-    axios.get('http://localhost:8083/getallFunds?id=' + location.state?.UserId)
+    axios.get('https://fundmatebackend-production.up.railway.app/getallFunds?id=' + location.state?.UserId)
       .then(response => {
         // 2. Filter Funds take List Info
         const fundListInfo = response.data.map(fund => ({
@@ -68,7 +68,7 @@ export default function ListFund()
       entries: []
     };
 
-    const promise=axios.post('http://localhost:8083/addFundList', newFund);
+    const promise=axios.post('https://fundmatebackend-production.up.railway.app/addFundList', newFund);
     toast.promise(promise, {
       loading: 'Adding fund...',  
     });

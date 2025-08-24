@@ -38,7 +38,7 @@ export default function AuthPages({ type }) {
 
 
     if (isLogin) {
-      const promise = axios.post('http://localhost:8083/login', submitData);
+      const promise = axios.post('https://fundmatebackend-production.up.railway.app/login', submitData);
 
       toast.promise(promise, { loading: 'Logging in...' });
 
@@ -79,7 +79,7 @@ export default function AuthPages({ type }) {
     }
     else {
       // Handle sign up logic
-      const promise = axios.post('http://localhost:8083/createUser', submitData);
+      const promise = axios.post('https://fundmatebackend-production.up.railway.app/createUser', submitData);
 
       toast.promise(
         promise,

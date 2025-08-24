@@ -29,7 +29,7 @@ export default function Profile() {
   // Fatch Data frrom Server
   const fatch = () => {
 
-    axios.get(`http://localhost:8083/userdetail?userId=${userId}&type=fullDetail`)
+    axios.get(`https://fundmatebackend-production.up.railway.app/userdetail?userId=${userId}&type=fullDetail`)
       .then(res => {
         setForm(res.data);
         setOriginalData(res.data);
@@ -56,7 +56,7 @@ export default function Profile() {
 
       case "name":
 
-        const promis = axios.patch(`http://localhost:8083/updateName/${form.id}?newName=${form.name}`)
+        const promis = axios.patch(`https://fundmatebackend-production.up.railway.app/updateName/${form.id}?newName=${form.name}`)
         toast.promise(promis, {
           loading: 'Please Wait..',
           success: 'Saved'
@@ -70,7 +70,7 @@ export default function Profile() {
       case "email":
 
         if (emailRegex.test(form.email)) {
-          const promis = axios.patch(`http://localhost:8083/updateEmail/${form.id}?newEmail=${form.email}&isVerified=${false}`)
+          const promis = axios.patch(`https://fundmatebackend-production.up.railway.app/updateEmail/${form.id}?newEmail=${form.email}&isVerified=${false}`)
           toast.promise(promis, {
             loading: 'Please Wait..',
             success: 'OTP Send'
@@ -104,7 +104,7 @@ export default function Profile() {
   const OtpValidator = () => {
     setShowOtpPopup(false);
 
-    const promis = axios.patch(`http://localhost:8083/updateEmail/${form.id}?newEmail=${form.email}&isVerified=${true}`)
+    const promis = axios.patch(`https://fundmatebackend-production.up.railway.app/updateEmail/${form.id}?newEmail=${form.email}&isVerified=${true}`)
     toast.promise(promis, {
       loading: 'Please Wait..',
     });

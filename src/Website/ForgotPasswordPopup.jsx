@@ -22,7 +22,7 @@ export default function ForgotPasswordPopup(state)
     const sendOtpEmail=()=>
     {
 
-        const promis = axios.post(`http://localhost:8083/resetPassword/sendOtp/${email.toLowerCase()}`);
+        const promis = axios.post(`https://fundmatebackend-production.up.railway.app/resetPassword/sendOtp/${email.toLowerCase()}`);
 
         toast.promise(promis, {
             loading: "Sending Email....",
@@ -72,7 +72,7 @@ export default function ForgotPasswordPopup(state)
 
         const payload = { email: email.toLowerCase(), password: newPassword };
 
-        const promis = axios.post("http://localhost:8083/resetPassword", payload);
+        const promis = axios.post("https://fundmatebackend-production.up.railway.app/resetPassword", payload);
 
         toast.promise(promis, {
             loading: "Resetting password...",

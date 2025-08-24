@@ -31,7 +31,7 @@ export default function DashboardHome()
     const fetchFunds = async () => {
 
       // Calling an API or using local data
-      axios.get('http://localhost:8083/getallFunds?id='+userId)
+      axios.get('https://fundmatebackend-production.up.railway.app/getallFunds?id='+userId)
         .then(response => {
           // toast.success('Fatch...')
           setFunds(response.data);
