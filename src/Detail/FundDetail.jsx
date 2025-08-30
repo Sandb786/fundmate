@@ -27,7 +27,7 @@ export default function FundDetail() {
   {
     if (!fundData) return;
 
-    axios.get(`https://fundmatebackend-production.up.railway.app/getAllEntries/${fundData.id}`)
+    axios.get(`/getAllEntries/${fundData.id}`)
       .then(response => {
         setEntries(response.data);
       })
@@ -65,7 +65,7 @@ export default function FundDetail() {
     };
 
 
-    const promis = axios.post(`https://fundmatebackend-production.up.railway.app/quickAddFund/${fundData.id}`, newEntry);
+    const promis = axios.post(`/quickAddFund/${fundData.id}`, newEntry);
     toast.promise(promis, {
       loading: 'Adding entry...',
       success: 'Entry added successfully!',
@@ -91,7 +91,7 @@ export default function FundDetail() {
       date: oldDate,
       amount: parseFloat(newAmount)
     };
-    const promis = axios.put(`https://fundmatebackend-production.up.railway.app/updateEntrie?fundName=${fundData.title}&userId=${fundData.userId}`, newEntry);
+    const promis = axios.put(`/updateEntrie?fundName=${fundData.title}&userId=${fundData.userId}`, newEntry);
     toast.promise(promis, {
       loading: 'Updating entry...'
     });
@@ -106,7 +106,7 @@ export default function FundDetail() {
   const handleDeleteEntry = id => {
     console.log("ID: " + id);
 
-    const promis = axios.delete(`https://fundmatebackend-production.up.railway.app/deleteEntrie?fundName=${fundData.title}&userId=${fundData.userId}&id=${id}`);
+    const promis = axios.delete(`/deleteEntrie?fundName=${fundData.title}&userId=${fundData.userId}&id=${id}`);
     toast.promise(promis, {
       loading: 'Deleting entry...'
     });
@@ -119,7 +119,7 @@ export default function FundDetail() {
 
   const handleUpdateFundList = () => 
   {   
-        const promis = axios.put(`https://fundmatebackend-production.up.railway.app/updateTitle/${fundData.id}?title=${title}`);
+        const promis = axios.put(`/updateTitle/${fundData.id}?title=${title}`);
         toast.promise(promis, {
           loading: 'Updating entry...'
         });
@@ -145,7 +145,7 @@ export default function FundDetail() {
   {   
       if(window.confirm("You Want to Delete the "+fundData.title))
       {
-        const promis = axios.delete(`https://fundmatebackend-production.up.railway.app/deleteFundList/${fundData.id}`);
+        const promis = axios.delete(`/deleteFundList/${fundData.id}`);
         toast.promise(promis, {
           loading: 'Deleting FundList...'
         });

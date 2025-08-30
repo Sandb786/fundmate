@@ -15,7 +15,7 @@ export default function ProfilePopup(state)
   useEffect(()=>
   {
    
-    axios.get(`https://fundmatebackend-production.up.railway.app/userdetail?userId=${state.userId}&type=nameAndEmail`)
+    axios.get(`/userdetail?userId=${state.userId}&type=nameAndEmail`)
     .then(res=>
     {
       setUser(res.data);

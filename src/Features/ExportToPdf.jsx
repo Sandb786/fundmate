@@ -4,24 +4,33 @@ import toast from 'react-hot-toast';
 
 export default function exportToPdf(entries = []) 
 {
-  const doc = new jsPDF();
+    const doc = new jsPDF();
 
-  // Optional: Add Logo (synchronously or skip if error)
-  try {
-    const logo = new Image();
-    logo.src = '/image.png'; // Should be in /public
-    logo.crossOrigin = 'anonymous';
-    logo.onload = () => {
-      doc.addImage(logo, 'PNG', 10, 5, 60, 15);
-      generateContent();
-    };
-    logo.onerror = () => generateContent();
-  } catch {
-    generateContent();
+    if (window.confirm("Are you sure to Export PDF ?")) 
+    {
+
+        try 
+        {
+          // Optional: Add Logo (synchronously or skip if error)
+          const logo = new Image();
+          logo.src = '/image.png'; // Should be in /public
+          logo.crossOrigin = 'anonymous';
+          logo.onload = () => {
+            doc.addImage(logo, 'PNG', 10, 5, 60, 15);
+            generateContent();
+          };
+          logo.onerror = () => generateContent();
+        }
+        catch 
+        {
+          generateContent();
+        }
+
   }
 
   // ⬇️ Core PDF generation logic
-  function generateContent() {
+  function generateContent() 
+  {
     // Title
     doc.setFontSize(20);
     doc.text('Fund Report', 105, 35, { align: 'center' });
@@ -73,4 +82,5 @@ export default function exportToPdf(entries = [])
 
     toast.success("PDF Exported Successfuly...");
   }
+
 }

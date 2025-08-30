@@ -26,7 +26,7 @@ export default function LoddingPage() {
     useEffect(() => {
 
         const tryConnect = () => {
-            axios.get('https://fundmatebackend-production.up.railway.app/')
+            axios.get('/')
                 .then(() => {
                     setConnectionStatus('✅ Connected to application!');
                     navigate('/index');

@@ -46,6 +46,7 @@ function App() {
           <Route path="/forgatePassword" element={<ForgotPasswordPopup/>} />
 
           <Route path="/analysis" element={<FundAnalysis/>} />
+          <Route path="/demo" element={<Demo/>} />
 
         </Routes>
       </Router> 

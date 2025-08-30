@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { ChartSpline, House, User, Mail, Lock, Edit, Save, X, Eye, EyeOff, ListRestart, Trash2, CircleX, KeyRound } from 'lucide-react';
-import axios from 'axios';
 import { motion } from 'framer-motion';
 import OTPPopup from './OTPPopup';
 import { useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Profile() {
   const location = useLocation();
@@ -29,7 +29,7 @@ export default function Profile() {
   // Fatch Data frrom Server
   const fatch = () => {
 
-    axios.get(`https://fundmatebackend-production.up.railway.app/userdetail?userId=${userId}&type=fullDetail`)
+    axios.get(`/userdetail?userId=${userId}&type=fullDetail`)
       .then(res => {
         setForm(res.data);
         setOriginalData(res.data);
@@ -56,7 +56,7 @@ export default function Profile() {
 
       case "name":
 
-        const promis = axios.patch(`https://fundmatebackend-production.up.railway.app/updateName/${form.id}?newName=${form.name}`)
+        const promis = axios.patch(`/updateName/${form.id}?newName=${form.name}`)
         toast.promise(promis, {
           loading: 'Please Wait..',
           success: 'Saved'
@@ -70,7 +70,7 @@ export default function Profile() {
       case "email":
 
         if (emailRegex.test(form.email)) {
-          const promis = axios.patch(`https://fundmatebackend-production.up.railway.app/updateEmail/${form.id}?newEmail=${form.email}&isVerified=${false}`)
+          const promis = axios.patch(`/updateEmail/${form.id}?newEmail=${form.email}&isVerified=${false}`)
           toast.promise(promis, {
             loading: 'Please Wait..',
             success: 'OTP Send'
@@ -104,7 +104,7 @@ export default function Profile() {
   const OtpValidator = () => {
     setShowOtpPopup(false);
 
-    const promis = axios.patch(`https://fundmatebackend-production.up.railway.app/updateEmail/${form.id}?newEmail=${form.email}&isVerified=${true}`)
+    const promis = axios.patch(`/updateEmail/${form.id}?newEmail=${form.email}&isVerified=${true}`)
     toast.promise(promis, {
       loading: 'Please Wait..',
     });

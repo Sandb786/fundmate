@@ -17,12 +17,23 @@ export default function ForgotPasswordPopup(state)
     const [statuses, setStatuses] = useState([]);
     const [orignalOtp,setOrignalOtp]=useState();
 
+    const handleClose=()=>
+    {
+        state.setIsOpen(false)
+
+        setEmail("");
+        setOtp("");
+        setNewPassword("");
+        setConfirmPassword("");
+        setStatuses([]);
+
+    }
     
 
     const sendOtpEmail=()=>
     {
 
-        const promis = axios.post(`https://fundmatebackend-production.up.railway.app/resetPassword/sendOtp/${email.toLowerCase()}`);
+        const promis = axios.post(`/resetPassword/sendOtp/${email.toLowerCase()}`);
 
         toast.promise(promis, {
             loading: "Sending Email....",
@@ -61,6 +72,10 @@ export default function ForgotPasswordPopup(state)
 
     const handleResetPassword = () => 
     {
+        if(newPassword.length<6||confirmPassword.length<6) 
+        {
+            return toast.error("Password Length must be 6 or more..");    
+        }
 
         if (!email || !otp || !newPassword || !confirmPassword) {
             return toast.error("Fill all required fields!");
@@ -70,9 +85,14 @@ export default function ForgotPasswordPopup(state)
             return toast.error("Passwords do not match!");
         }
 
+        if(!statuses.includes("otp done"))
+        {
+            return toast.error("Please verify OTP first!");
+        }
+
         const payload = { email: email.toLowerCase(), password: newPassword };
 
-        const promis = axios.post("https://fundmatebackend-production.up.railway.app/resetPassword", payload);
+        const promis = axios.post("/resetPassword", payload);
 
         toast.promise(promis, {
             loading: "Resetting password...",
@@ -118,7 +138,7 @@ export default function ForgotPasswordPopup(state)
                             </div>
                             <CircleX
                                 className="w-6 h-6 text-gray-400 hover:text-red-500 cursor-pointer"
-                                onClick={() => state.setIsOpen(false)}
+                                onClick={handleClose}
                             />
                         </div>
 
@@ -222,7 +242,7 @@ export default function ForgotPasswordPopup(state)
                             {/* Submit */}
                             <button
                                 onClick={handleResetPassword}
-                                disabled={!email.trim() || !otp.trim() || !newPassword.trim() || !confirmPassword.trim()}
+                                disabled={!email.trim() || !otp.trim() || !newPassword.trim() || !confirmPassword.trim() || !statuses.includes("otp done")}
                                 className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-xl transition disabled:opacity-40 disabled:cursor-not-allowed"
                             >
                                 <Save className="w-5 h-5" /> Reset Password

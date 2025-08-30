@@ -13,6 +13,7 @@ export default function AuthPages({ type }) {
   const [isLogin, setIsLogin] = useState(type);
   const [showPassword, setShowPassword] = useState(false);
   const [showForgatePassword,setShowForgatePassword]=useState(false);
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@(gmail\.com)$/;
 
   const [formData, setFormData] = useState({
     name: '',
@@ -28,8 +29,21 @@ export default function AuthPages({ type }) {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e) => 
+  {
     e.preventDefault();
+
+    if(! emailRegex.test(formData.email)) 
+    {
+        toast.error("Invalid Email — only @gmail.com is accepted");
+        return ;
+    }
+
+    if(formData.password.length<6)
+    {
+       toast.error("Password Length must be 6 or more..");
+       return ;
+    }
 
     const submitData = isLogin
       ? { email: formData.email, password: formData.password }
@@ -38,7 +52,7 @@ export default function AuthPages({ type }) {
 
 
     if (isLogin) {
-      const promise = axios.post('https://fundmatebackend-production.up.railway.app/login', submitData);
+      const promise = axios.post('/login', submitData);
 
       toast.promise(promise, { loading: 'Logging in...' });
 
@@ -74,12 +88,11 @@ export default function AuthPages({ type }) {
           console.error('Login error:', error);
         });
 
-      //navigate('/dashboard',{state: { email: submitData.email } });
-
     }
+
     else {
       // Handle sign up logic
-      const promise = axios.post('https://fundmatebackend-production.up.railway.app/createUser', submitData);
+      const promise = axios.post('/createUser', submitData);
 
       toast.promise(
         promise,
@@ -184,7 +197,7 @@ export default function AuthPages({ type }) {
                   placeholder="you@example.com"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full bg-[#1a1a1a] text-gray-100 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500 text-base"
+                  className={`w-full bg-[#1a1a1a] text-gray-100 px-4 py-3 rounded-lg focus:outline-none focus:ring-1 ${emailRegex.test(formData.email)? 'focus:ring-blue-500':'focus:ring-red-500'} placeholder-gray-500 text-base`}
                   required
                 />
               </div>
@@ -195,7 +208,7 @@ export default function AuthPages({ type }) {
                 <input
                   type={showPassword ? 'text' : 'password'}
                   name='password'
-                  className="w-full bg-[#1a1a1a] text-gray-100 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500 text-base"
+                  className={`w-full bg-[#1a1a1a] text-gray-100 px-4 py-3 rounded-lg focus:outline-none focus:ring-1 ${formData.password.length>=6? 'focus:ring-blue-500':'focus:ring-red-500'} placeholder-gray-500 text-base`}
                   placeholder="Enter your password"
                   value={formData.password}
                   onChange={handleChange}
