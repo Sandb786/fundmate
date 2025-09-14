@@ -39,6 +39,7 @@ export default function LoddingPage() {
         const connectInterval = setInterval(() => 
         {
             tryConnect();
+            
         }, 3000);
 
         return () => clearInterval(connectInterval);
