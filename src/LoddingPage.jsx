@@ -29,9 +29,11 @@ export default function LoddingPage() {
     }, [secondsLeft]);
 
     // 🌐 Try connecting every 45 seconds until successful or timeout
-    useEffect(() => {
+    useEffect(() => 
+    {
 
-        const tryConnect = () => {
+        const tryConnect = () => 
+        {
             axios.get('/')
                 .then(() => {
                     setConnectionStatus('✅ Connected to application!');
@@ -42,6 +44,9 @@ export default function LoddingPage() {
                 });
         };
 
+        tryConnect(); // Initial attempt
+
+        // Retry every 45 seconds
         const connectInterval = setInterval(() => 
         {
             tryConnect();
@@ -49,6 +54,7 @@ export default function LoddingPage() {
         }, 45000);
 
         return () => clearInterval(connectInterval);
+        
     }, [navigate]);
 
     return (
