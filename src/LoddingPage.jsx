@@ -4,7 +4,7 @@ import { ChartSpline } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 export default function LoddingPage() {
-    const [secondsLeft, setSecondsLeft] = useState(60);
+    const [secondsLeft, setSecondsLeft] = useState(90);
     const [connectionStatus, setConnectionStatus] = useState('🚀 Connecting to application...');
     const navigate = useNavigate();
 
@@ -39,7 +39,7 @@ export default function LoddingPage() {
         const connectInterval = setInterval(() => 
         {
             tryConnect();
-        }, 3000);
+        }, 30000);
 
         return () => clearInterval(connectInterval);
     }, [navigate]);
@@ -62,7 +62,7 @@ export default function LoddingPage() {
             <div className="absolute bottom-6 text-center px-4">
                 <p className="text-gray-400 text-md">
                     <strong>Note:</strong> We are using a free server which may take up to
-                    <span className="text-blue-400 font-semibold"> 60 seconds</span> to wake up. Thank you for your patience.
+                    <span className="text-blue-400 font-semibold"> 90 seconds</span> to wake up. Thank you for your patience.
                 </p>
             </div>
         </div>
