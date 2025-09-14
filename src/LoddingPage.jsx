@@ -9,20 +9,26 @@ export default function LoddingPage() {
     const navigate = useNavigate();
 
     // ⏳ Countdown for user feedback
-    useEffect(() => {
-        const timer = setInterval(() => {
+    useEffect(() => 
+    {
+        const timer = setInterval(() => 
+        {
             setSecondsLeft(prev => {
                 if (prev <= 1) {
                     clearInterval(timer);
+                   setConnectionStatus("🔄 Please Wait..... ")
+                   setSecondsLeft(10)
                     return 1;
                 }
                 return prev - 1;
             });
         }, 1000);
-        return () => clearInterval(timer);
-    }, []);
 
-    // 🌐 Try connecting every 3 seconds until successful or timeout
+        return () => clearInterval(timer);
+
+    }, [secondsLeft]);
+
+    // 🌐 Try connecting every 45 seconds until successful or timeout
     useEffect(() => {
 
         const tryConnect = () => {
@@ -32,14 +38,15 @@ export default function LoddingPage() {
                     navigate('/index');
                 })
                 .catch(() => {
-                    setConnectionStatus('🔄 Still trying to connect...');
+                    setConnectionStatus('❌ Somthing Went Wrong...');
                 });
         };
 
         const connectInterval = setInterval(() => 
         {
             tryConnect();
-        }, 30000);
+
+        }, 45000);
 
         return () => clearInterval(connectInterval);
     }, [navigate]);
